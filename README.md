@@ -11,3 +11,10 @@ To start machine-b:
 
 python machine-b.py topic_send topic_listen sendor_ID
 
+topics:
+/trasownicy/kokokola/
+
+machineA -> database: bottles
+machineB -> database: faults
+control panel -> fog: cp
+fog -> machines: cp-ab ?

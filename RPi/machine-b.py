@@ -36,7 +36,7 @@ def on_message(mosq, obj, msg):
     print("Data: ", msg.payload)
 
     msg = int(msg.payload)
-    if msg >= 0 & msg <= 100:
+    if 0 <= msg <= 100:
         power = msg
 
 
