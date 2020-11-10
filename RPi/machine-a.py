@@ -73,12 +73,14 @@ def publish_To_Topic(topic, message):
 def simulate_machine_a():
     global power
     global bottles
+    mu_multiplier = sys.argv[4]
+    sigma = sys.argv[5]
+
     if power == 0:
         bottles = 0
     else:
-        mu = power*0.1
-        sigma = 0.7
-        bottles = int(round(random.gauss(mu, sigma)))
+        mu = power*mu_multiplier
+        bottles = round(random.gauss(mu, sigma))
         if bottles <= 0:
             bottles = 0
 
