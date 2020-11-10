@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
-import random, threading, json
-from datetime import datetime
+import threading
+import json
 import sys
 import os
 
@@ -12,8 +12,8 @@ Keep_Alive_Interval = 45
 MQTT_Topic_send = sys.argv[1]
 MQTT_Topic_listen = sys.argv[2]
 
-# ====================================================
 
+# ====================================================
 
 def on_connect(client, userdata, rc):
     if rc != 0:
@@ -38,12 +38,12 @@ def on_message(mosq, obj, msg):
     m_in = json.loads(m_decode)
     bottles = int(m_in["Bottles"])
     faults = int(m_in["Faults"])
-    percentage = (faults/bottles)*100
+    percentage = (faults / bottles) * 100
 
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%")
     if percentage > 20:
-        print('\033[93m'+"DANGER!"+'\033[0m')
+        print('\033[93m' + "DANGER!" + '\033[0m')
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
@@ -54,6 +54,10 @@ def on_subscribe(mosq, obj, mid, granted_qos):
 def on_disconnect(client, userdata, rc):
     if rc != 0:
         pass
+
+
+def get_input():
+    pass
 
 
 mqttc = mqtt.Client()
@@ -72,13 +76,15 @@ def publish_To_Topic(topic, message):
 
 
 def publish_New_Power_to_MQTT():
-
-    json_data = json.dumps({ power })
+    newPower = input()
+    json_data = json.dumps({newPower})
     publish_To_Topic(MQTT_Topic_send, json_data)
 
 
-publish_New_Power_to_MQTT()
+input_thread = threading.Thread(target=publish_New_Power_to_MQTT)
+input_thread.start()
 
 # Continue the network loop
 mqttc.loop_forever()
 
+input_thread.join()
