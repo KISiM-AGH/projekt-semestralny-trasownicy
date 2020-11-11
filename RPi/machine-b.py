@@ -15,7 +15,7 @@ faults = 0
 # ====================================================
 
 
-def on_connect(client, userdata, rc):
+def on_connect(client, userdata, rc, properties=None):
     if rc != 0:
         pass
         print("Unable to connect to MQTT Broker...")
@@ -86,7 +86,6 @@ def simulate_machine_b():
 
 
 def publish_Fake_Sensor_Values_to_MQTT():
-
     threading.Timer(10.0, publish_Fake_Sensor_Values_to_MQTT).start()
     simulate_machine_b()
     bottles_data = {'Machine_ID': sys.argv[3],
@@ -100,4 +99,3 @@ publish_Fake_Sensor_Values_to_MQTT()
 
 # Continue the network loop
 mqttc.loop_forever()
-

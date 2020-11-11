@@ -15,7 +15,7 @@ MQTT_Topic_listen = sys.argv[2]
 
 # ====================================================
 
-def on_connect(client, userdata, rc):
+def on_connect(client, userdata, rc, properties=None):
     if rc != 0:
         pass
         print("Unable to connect to MQTT Broker...")

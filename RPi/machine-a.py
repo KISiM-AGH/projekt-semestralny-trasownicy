@@ -12,18 +12,16 @@ MQTT_Topic_send = sys.argv[1]  # /trasownicy/kokokola/bottles
 MQTT_Topic_listen = sys.argv[2]  # /trasownicy/kokokola/cp ?
 power = 0
 bottles = 0
-
-
 # ====================================================
 
 
-def on_connect(client, userdata, rc):
+def on_connect(client, userdata, rc, properties=None):
     if rc != 0:
         pass
         print("Unable to connect to MQTT Broker...")
     else:
         print("Connected with MQTT Broker: " + str(MQTT_Broker))
-    mqttc.subscribe(MQTT_Topic_listen, 0)
+        mqttc.subscribe(MQTT_Topic_listen, 0)
 
 
 def on_publish(client, userdata, mid):
@@ -75,8 +73,8 @@ def publish_To_Topic(topic, message):
 def simulate_machine_a():
     global power
     global bottles
-    mu_multiplier = float(sys.argv[4])
-    sigma = int(sys.argv[5])
+    mu_multiplier = float(sys.argv[4]) #5
+    sigma = int(sys.argv[5]) #0.7
 
     if power == 0:
         bottles = 0
