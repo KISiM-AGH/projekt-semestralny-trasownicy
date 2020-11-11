@@ -76,13 +76,13 @@ def simulate_machine_b():
     global power
     global faults
 
-    a = 0.000223531
+    a = 0.000443531
     b = 2.32193
 
     if power == 0:
         faults = 0
     else:
-        faults = round(random.gauss(round(a * pow(power, b)), 0.4))
+        faults = round(random.gauss(round(a * pow(power, b)), 0.5))
         if faults <= 0:
             faults = 0
 
