@@ -109,19 +109,3 @@ def publish_New_Power_to_MQTT():
 mqttc.loop_start()
 publish_New_Power_to_MQTT()
 
-# v0.0.1
-# def publish_New_Power_to_MQTT():
-#     global power
-#     newPower = input()
-#     # json_data = json.dumps({newPower})
-#     # publish_To_Topic(MQTT_Topic_send, json_data)
-#     power = newPower
-#
-#
-# input_thread = threading.Thread(target=publish_New_Power_to_MQTT)
-# input_thread.start()
-#
-# # Continue the network loop
-# mqttc.loop_forever()
-#
-# input_thread.join()
