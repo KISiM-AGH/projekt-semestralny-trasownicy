@@ -73,8 +73,8 @@ def publish_To_Topic(topic, message):
 def simulate_machine_a():
     global power
     global bottles
-    mu_multiplier = float(sys.argv[4]) #5
-    sigma = int(sys.argv[5]) #0.7
+    mu_multiplier = float(sys.argv[4])#1
+    sigma = float(sys.argv[5]) #0.7
 
     if power == 0:
         bottles = 0
