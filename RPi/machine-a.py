@@ -21,7 +21,7 @@ def on_connect(client, userdata, rc, properties=None):
         print("Unable to connect to MQTT Broker...")
     else:
         print("Connected with MQTT Broker: " + str(MQTT_Broker))
-        mqttc.subscribe(MQTT_Topic_listen, 0)
+    mqttc.subscribe(MQTT_Topic_listen, 0)
 
 
 def on_publish(client, userdata, mid):
