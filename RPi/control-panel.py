@@ -11,6 +11,11 @@ MQTT_Port = 1883
 Keep_Alive_Interval = 45
 MQTT_Topic_send = sys.argv[1]
 MQTT_Topic_listen = sys.argv[2]
+MQTT_Topic_A = sys.argv[3]
+MQTT_Topic_B = sys.argv[4]
+power = 0
+bottles = 0
+faults = 0
 # ====================================================
 
 
@@ -29,18 +34,25 @@ def on_publish(client, userdata, mid):
 
 def on_message(mosq, obj, msg):
     global power
+    global bottles
+    global faults
 
     print("MQTT Data Received...")
     print("MQTT Topic: " + msg.topic)
     print("Data: ", msg.payload)
+
     m_decode = str(msg.payload.decode("utf-8", "ignore"))
     m_in = json.loads(m_decode)
-    bottles = int(m_in["Bottles"])
-    faults = int(m_in["Faults"])
+
+    if msg.topic == MQTT_Topic_A:
+        bottles = int(m_in["Bottles"])
+    elif (msg.topic == MQTT_Topic_B):
+        faults = int(m_in["Faults"])
+
     percentage = (faults / bottles) * 100
 
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%")
+    print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
     if percentage > 20:
         print('\033[93m' + "DANGER!" + '\033[0m')
 
