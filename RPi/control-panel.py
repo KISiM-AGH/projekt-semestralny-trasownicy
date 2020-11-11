@@ -11,9 +11,8 @@ MQTT_Port = 1883
 Keep_Alive_Interval = 45
 MQTT_Topic_send = sys.argv[1]
 MQTT_Topic_listen = sys.argv[2]
-
-
 # ====================================================
+
 
 def on_connect(client, userdata, rc, properties=None):
     if rc != 0:

@@ -8,16 +8,12 @@ MQTT_Port = 1883
 Keep_Alive_Interval = 45
 MQTT_Topic_A = sys.argv[1]
 MQTT_Topic_B = sys.argv[2]
-MQTT_Topic_CP = sys.argv[3]
-MQTT_Topic_A2 = sys.argv[4]
 
 
 # Subscribe to all Sensors at Base Topic
 def on_connect(mosq, obj, rc, properties=None):
     mqttc.subscribe(MQTT_Topic_A, 0)
     mqttc.subscribe(MQTT_Topic_B, 0)
-    mqttc.subscribe(MQTT_Topic_CP, 0)
-    mqttc.subscribe(MQTT_Topic_A2, 0)
 
 
 def publish_To_Topic(topic, message):
@@ -34,11 +30,7 @@ def on_message(mosq, obj, msg):
     print("MQTT Topic: " + msg.topic)
     print("Data: ", msg.payload)
 
-    if msg.topic == MQTT_Topic_CP:
-        msg = int(msg.payload)
-        if 0 <= msg <= 100:
-            publish_To_Topic(MQTT_Topic_A2, msg)
-    elif (msg.topic == MQTT_Topic_A) or (msg.topic == MQTT_Topic_B):
+    if (msg.topic == MQTT_Topic_A) or (msg.topic == MQTT_Topic_B):
         Data_Handler(msg.topic, msg.payload)
 
 

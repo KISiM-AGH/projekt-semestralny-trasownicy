@@ -5,16 +5,24 @@ There are two type machines (machine-a and machine-b) in two departments of fact
 
 To start machine-a:
 
-python machine-a.py topic_send topic_listen sendor_ID
+python3 machine-a.py topic_send topic_listen machine_ID mu_multiplier sigma
+
+mu_multiplier, sigma are used to simulate sensor output. Tested for mu_m 1 and sigma 0.7; 
 
 To start machine-b:
 
-python machine-b.py topic_send topic_listen sendor_ID
+python3 machine-b.py topic_send topic_listen machine_ID
+
+Listener:
+
+python3 listener.py topic_a topic_b
+
+topic_a and topic_b are for listening to machine-a and machine-b outputs
 
 topics:
-/trasownicy/kokokola/
 
-machineA -> database: bottles
-machineB -> database: faults
-control panel -> fog: cp
-fog -> machines: cp-ab ?
+/trasownicy/kokokola/bottles - machine a to database and control panel (machineA: send, cp: listen, listener: listen)
+
+/trasownicy/kokokola/faults  - machine b to database and control panel (machineB: send, cp: listen, listener: listen)
+
+/trasownicy/kokokola/cp  - control panel commands to machines (machineA: listen, machineB: listen, cp: listen, cp send)
