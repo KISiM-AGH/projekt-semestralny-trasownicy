@@ -30,12 +30,14 @@ def Data_Handler(topic, jsonData):
     # Parse Data
     json_Dict = json.loads(jsonData)
     MachineID = json_Dict['Machine_ID']
+    Power = json_Dict['Power']
     Date_and_Time = json_Dict['Date']
     global DataPackageA, DataPackageB, i, j
     if topic == MQTT_Topic_A:
         Bottles = json_Dict['Bottles']
         singleData = {
             'MachineID': MachineID,
+            'Power': Power,
             'Date_and_Time': Date_and_Time,
             'Bottles': Bottles,
         }
@@ -54,6 +56,7 @@ def Data_Handler(topic, jsonData):
         Faults = json_Dict['Faults']
         singleData = {
             'MachineID': MachineID,
+            'Power': Power,
             'Date_and_Time': Date_and_Time,
             'Faults': Faults,
         }
