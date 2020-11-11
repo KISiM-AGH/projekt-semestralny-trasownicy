@@ -25,4 +25,4 @@ topics:
 
 /trasownicy/kokokola/faults  - machine b to database and control panel (machineB: send, cp: listen, listener: listen)
 
-/trasownicy/kokokola/cp  - control panel commands to machines (machineA: listen, machineB: listen, cp: listen, cp send)
+/trasownicy/kokokola/cp  - control panel commands to machines (machineA: listen, machineB: listen, cp: send)

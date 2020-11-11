@@ -16,12 +16,6 @@ def on_connect(mosq, obj, rc, properties=None):
     mqttc.subscribe(MQTT_Topic_B, 0)
 
 
-def publish_To_Topic(topic, message):
-    mqttc.publish(topic, message)
-    print("Published: " + str(message) + " " + "on MQTT Topic: " + str(topic))
-    print("")
-
-
 # Save Data into DB Table
 def on_message(mosq, obj, msg):
     # This is the Master Call for saving MQTT Data into DB
@@ -37,23 +31,13 @@ def on_subscribe(mosq, obj, mid, granted_qos):
     pass
 
 
-def on_publish(client, userdata, mid):
-    pass
-
-
-def on_disconnect(client, userdata, rc):
-    if rc != 0:
-        pass
-
-
 mqttc = mqtt.Client()
 
 # Assign event callbacks
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
 mqttc.on_subscribe = on_subscribe
-mqttc.on_disconnect = on_disconnect
-mqttc.on_publish = on_publish
+
 # Connect
 mqttc.connect(MQTT_Broker, int(MQTT_Port), int(Keep_Alive_Interval))
 
