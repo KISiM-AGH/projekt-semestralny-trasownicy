@@ -76,7 +76,7 @@ def simulate_machine_b():
     global power
     global faults
 
-    a = 0.000113531
+    a = 0.000443531
     b = 2.32193
 
     if power == 0:
