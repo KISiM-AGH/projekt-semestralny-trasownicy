@@ -93,21 +93,24 @@ def publish_To_Topic(topic, message):
     print("")
 
 
-def publish_New_Power_to_MQTT():
-    global power
-    global percentage
-    while True:
-        newPower = input("Set power:")
-        json_data = json.dumps({'Power': newPower})
-        publish_To_Topic(MQTT_Topic_send, json_data)
-        power = newPower
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
+# def publish_New_Power_to_MQTT():
+#     global power
+#     global percentage
+#     while True:
+#         newPower = input("Set power:")
+#         json_data = json.dumps({'Power': newPower})
+#         publish_To_Topic(MQTT_Topic_send, json_data)
+#         power = newPower
+#         os.system('cls' if os.name == 'nt' else 'clear')
+#         print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
 
+json_data = json.dumps({'Power': 50})
+publish_To_Topic(MQTT_Topic_send, json_data)
+power = 50
 
 # Continue the network loop
 mqttc.loop_start()
-publish_New_Power_to_MQTT()
+# publish_New_Power_to_MQTT()
 
 # v0.0.1
 # def publish_New_Power_to_MQTT():
