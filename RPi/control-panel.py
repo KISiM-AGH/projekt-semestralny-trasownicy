@@ -96,7 +96,7 @@ def publish_New_Power_to_MQTT():
     global power
     global percentage
     while True:
-        newPower = input()
+        newPower = input("Set power:")
         json_data = json.dumps({'Power': newPower})
         publish_To_Topic(MQTT_Topic_send, json_data)
         power = newPower
