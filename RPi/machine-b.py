@@ -92,7 +92,7 @@ def publish_Fake_Sensor_Values_to_MQTT():
     simulate_machine_b()
     bottles_data = {'Machine_ID': sys.argv[3],
                     'Date': (datetime.today()).strftime("%d-%b-%Y %H:%M:%S:%f"),
-                    'Faults': float("{0:.2f}".format(faults))}
+                    'Faults': faults}
     json_data = json.dumps(bottles_data)
     publish_To_Topic(MQTT_Topic_send, json_data)
 

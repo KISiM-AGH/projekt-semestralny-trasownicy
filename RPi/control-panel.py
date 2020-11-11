@@ -53,7 +53,7 @@ def on_message(mosq, obj, msg):
         faults = int(m_in["Faults"])
 
     if bottles != 0:
-        percentage = (faults / bottles) * 100
+        percentage = round(((faults / bottles) * 100), 2)
     else:
         percentage = 0
 
