@@ -10,9 +10,8 @@ MQTT_Broker = "192.168.23.51"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
 MQTT_Topic_send = sys.argv[1]
-MQTT_Topic_listen = sys.argv[2]
-MQTT_Topic_A = sys.argv[3]
-MQTT_Topic_B = sys.argv[4]
+MQTT_Topic_A = sys.argv[2]
+MQTT_Topic_B = sys.argv[3]
 power = 0
 bottles = 0
 faults = 0
@@ -25,7 +24,8 @@ def on_connect(client, userdata, rc, properties=None):
         print("Unable to connect to MQTT Broker...")
     else:
         print("Connected with MQTT Broker: " + str(MQTT_Broker))
-    mqttc.subscribe(MQTT_Topic_listen, 0)
+    mqttc.subscribe(MQTT_Topic_A, 0)
+    mqttc.subscribe(MQTT_Topic_B, 0)
 
 
 def on_publish(client, userdata, mid):
