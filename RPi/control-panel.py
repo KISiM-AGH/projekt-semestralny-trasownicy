@@ -61,6 +61,7 @@ def on_message(mosq, obj, msg):
     print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
     if percentage > 20:
         print('\033[93m' + "DANGER!" + '\033[0m')
+    print("Set power:")
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
