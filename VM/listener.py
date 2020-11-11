@@ -52,7 +52,6 @@ mqttc = mqtt.Client()
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
 mqttc.on_subscribe = on_subscribe
-mqttc = mqtt.Client()
 mqttc.on_disconnect = on_disconnect
 mqttc.on_publish = on_publish
 # Connect
