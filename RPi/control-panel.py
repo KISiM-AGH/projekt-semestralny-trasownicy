@@ -90,9 +90,11 @@ def publish_To_Topic(topic, message):
 
 
 def publish_New_Power_to_MQTT():
+    global power
     newPower = input()
     json_data = json.dumps({newPower})
     publish_To_Topic(MQTT_Topic_send, json_data)
+    power = newPower
 
 
 input_thread = threading.Thread(target=publish_New_Power_to_MQTT)
