@@ -97,11 +97,16 @@ def publish_New_Power_to_MQTT():
     global power
     global percentage
     while True:
-        newPower = input("Set power:")
-        json_data = json.dumps({'Power': newPower})
-        publish_To_Topic(MQTT_Topic_send, json_data)
-        power = newPower
-        os.system('cls' if os.name == 'nt' else 'clear')
+        input_val = input("Set power:")
+        if (input_val.isdigit()) and (0 <= int(input_val) <= 100):
+            newPower = int(input_val)
+            json_data = json.dumps({'Power': newPower})
+            publish_To_Topic(MQTT_Topic_send, json_data)
+            power = newPower
+            os.system('cls' if os.name == 'nt' else 'clear')
+        else:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Wrong value. Must be integer between 1 and 100")
         print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
 
 
