@@ -29,9 +29,7 @@ def on_message(mosq, obj, msg):
     print("MQTT Data Received...")
     print("MQTT Topic: " + msg.topic)
     print("Data: ", msg.payload)
-
-    if (msg.topic == MQTT_Topic_A) or (msg.topic == MQTT_Topic_B):
-        Data_Handler(msg.topic, msg.payload)
+    Data_Handler(msg.topic, msg.payload)
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
