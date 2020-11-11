@@ -35,9 +35,11 @@ def on_message(mosq, obj, msg):
     print("MQTT Topic: " + msg.topic)
     print("Data: ", msg.payload)
 
-    msg = int(msg.payload)
-    if 0 <= msg <= 100:
-        power = msg
+    m_decode = str(msg.payload.decode("utf-8", "ignore"))
+    m_in = json.loads(m_decode)
+    value = int(m_in["Power"])
+    if 0 <= value <= 100:
+        power = value
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
