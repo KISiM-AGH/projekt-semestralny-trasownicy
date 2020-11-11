@@ -15,7 +15,7 @@ MQTT_Topic_B = sys.argv[3]
 power = 0
 bottles = 0
 faults = 0
-
+percentage = 0
 
 # ====================================================
 
@@ -38,6 +38,7 @@ def on_message(mosq, obj, msg):
     global power
     global bottles
     global faults
+    global percentage
 
     print("MQTT Data Received...")
     print("MQTT Topic: " + msg.topic)
@@ -48,7 +49,7 @@ def on_message(mosq, obj, msg):
 
     if msg.topic == MQTT_Topic_A:
         bottles = int(m_in["Bottles"])
-    elif (msg.topic == MQTT_Topic_B):
+    elif msg.topic == MQTT_Topic_B:
         faults = int(m_in["Faults"])
 
     if bottles != 0:
@@ -93,11 +94,14 @@ def publish_To_Topic(topic, message):
 
 def publish_New_Power_to_MQTT():
     global power
+    global percentage
     while True:
         newPower = input()
-        # json_data = json.dumps({newPower})
-        # publish_To_Topic(MQTT_Topic_send, json_data)
+        json_data = json.dumps({'Power': newPower})
+        publish_To_Topic(MQTT_Topic_send, json_data)
         power = newPower
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
 
 
 # Continue the network loop
