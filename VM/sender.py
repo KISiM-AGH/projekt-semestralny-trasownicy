@@ -59,7 +59,7 @@ def Data_Handler(topic, jsonData):
         }
         DataPackageB += [pymongo.InsertOne(singleData)]
         if j >= 9:
-            db.faults.bulk_write(DataPackageA)
+            db.faults.bulk_write(DataPackageB)
             j = 0
             DataPackageB = []
             print("Inserted faults data into database.")
