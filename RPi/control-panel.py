@@ -49,7 +49,10 @@ def on_message(mosq, obj, msg):
     elif (msg.topic == MQTT_Topic_B):
         faults = int(m_in["Faults"])
 
-    percentage = (faults / bottles) * 100
+    if bottles != 0:
+        percentage = (faults / bottles) * 100
+    else:
+        percentage = 0
 
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
