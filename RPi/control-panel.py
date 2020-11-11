@@ -15,6 +15,8 @@ MQTT_Topic_B = sys.argv[3]
 power = 0
 bottles = 0
 faults = 0
+
+
 # ====================================================
 
 
@@ -92,15 +94,14 @@ def publish_To_Topic(topic, message):
 def publish_New_Power_to_MQTT():
     global power
     newPower = input()
-    json_data = json.dumps({newPower})
-    publish_To_Topic(MQTT_Topic_send, json_data)
+    # json_data = json.dumps({newPower})
+    # publish_To_Topic(MQTT_Topic_send, json_data)
     power = newPower
 
 
-input_thread = threading.Thread(target=publish_New_Power_to_MQTT)
-input_thread.start()
-
-# Continue the network loop
-mqttc.loop_forever()
-
-input_thread.join()
+while True:
+    input_thread = threading.Thread(target=publish_New_Power_to_MQTT)
+    input_thread.start()
+    # Continue the network loop
+    mqttc.loop()
+    input_thread.join()
