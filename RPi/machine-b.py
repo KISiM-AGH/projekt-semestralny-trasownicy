@@ -82,7 +82,7 @@ def simulate_machine_b():
     if power == 0:
         faults = 0
     else:
-        faults = round(a * pow(power, b))
+        faults = round(random.gauss(round(a * pow(power, b)), 0.4))
         if faults <= 0:
             faults = 0
 
