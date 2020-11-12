@@ -12,7 +12,7 @@ username = urllib.parse.quote_plus('admin')
 password = urllib.parse.quote_plus('trasownicy69')
 client = pymongo.MongoClient(
     "mongodb+srv://%s:%s@cluster1.vmliw.mongodb.net/Cloud-beta-01?retryWrites=true&w=majority" % (username, password))
-db = client.kokokola.fabryka1  # change for different factory
+db = client.kokokola
 
 serverStatusResult = db.command("serverStatus")
 print(serverStatusResult)
@@ -43,7 +43,7 @@ def Data_Handler(topic, jsonData):
         }
         DataPackageA += [pymongo.InsertOne(singleData)]
         if i >= 9:
-            db.bottles.bulk_write(DataPackageA)
+            db.fabryka1.bottles.bulk_write(DataPackageA)
             i = 0
             DataPackageA = []
             print("Inserted bottle data into database.")
@@ -62,7 +62,7 @@ def Data_Handler(topic, jsonData):
         }
         DataPackageB += [pymongo.InsertOne(singleData)]
         if j >= 9:
-            db.faults.bulk_write(DataPackageB)
+            db.fabryka1.faults.bulk_write(DataPackageB)
             j = 0
             DataPackageB = []
             print("Inserted faults data into database.")
