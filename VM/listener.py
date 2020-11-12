@@ -1,6 +1,8 @@
 import paho.mqtt.client as mqtt
+from .sender import Data_Handler
 import sys
-from VM.sender import Data_Handler
+
+Factory_ID = sys.argv[1]
 
 # MQTT Settings
 MQTT_Broker = "192.168.23.51"
@@ -23,7 +25,7 @@ def on_message(mosq, obj, msg):
     print("MQTT Data Received...")
     print("MQTT Topic: " + msg.topic)
     print("Data: ", msg.payload)
-    Data_Handler(msg.topic, msg.payload)
+    Data_Handler(msg.topic, msg.payload, Factory_ID)
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):

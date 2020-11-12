@@ -10,7 +10,7 @@ MQTT_Port = 1883
 Keep_Alive_Interval = 45
 
 Machine_ID = sys.argv[1]
-Factory_ID = sys.argv[2]
+# Factory_ID = sys.argv[2]
 MQTT_Topic_send = '/trasownicy/kokokola/faults'  # sys.argv[3]
 MQTT_Topic_listen = '/trasownicy/kokokola/cp'  # sys.argv[4]
 
@@ -94,7 +94,7 @@ def simulate_machine_b():
 def publish_Fake_Sensor_Values_to_MQTT():
     threading.Timer(10.0, publish_Fake_Sensor_Values_to_MQTT).start()
     simulate_machine_b()
-    bottles_data = {'Factory_ID': Factory_ID,
+    bottles_data = {  # 'Factory_ID': Factory_ID,
                     'Machine_ID': Machine_ID,
                     'Power': power,
                     'Date': (datetime.today()).strftime("%d-%b-%Y %H:%M:%S:%f"),

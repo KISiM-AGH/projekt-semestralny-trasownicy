@@ -5,15 +5,15 @@ There are two type machines (machine-a and machine-b) in two departments of fact
 
 To start machine-a:
 
-python3 machine-a.py factory_ID machine_ID
+python3 machine-a.py machine_ID
 
 To start machine-b:
 
-python3 machine-b.py factory_ID machine_ID
+python3 machine-b.py machine_ID
 
 Listener:
 
-python3 listener.py 
+python3 listener.py factory_ID
 
 topics:
 

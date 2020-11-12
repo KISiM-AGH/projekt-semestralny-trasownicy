@@ -1,9 +1,8 @@
 import json
 import pymongo
 import urllib.parse
-
-MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[1]
-MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[2]
+MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[2]
+MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[3]
 
 # ===============================================================
 # Database Manager Class
@@ -25,10 +24,10 @@ DataPackageB = []
 # Functions to push Sensor Data into Database
 
 # Function to save Temperature to DB Table
-def Data_Handler(topic, jsonData):
+def Data_Handler(topic, jsonData, Factory_ID):
     # Parse Data
     json_Dict = json.loads(jsonData)
-    FactoryID = json_Dict['Factory_ID']
+#    FactoryID = json_Dict['Factory_ID']
     MachineID = json_Dict['Machine_ID']
     Power = json_Dict['Power']
     Date_and_Time = json_Dict['Date']
@@ -36,7 +35,7 @@ def Data_Handler(topic, jsonData):
     if topic == MQTT_Topic_A:
         Bottles = json_Dict['Bottles']
         singleData = {
-            'FactoryID': FactoryID,
+            'FactoryID': Factory_ID,
             'MachineID': MachineID,
             'Power': Power,
             'Date_and_Time': Date_and_Time,
@@ -56,7 +55,7 @@ def Data_Handler(topic, jsonData):
     else:
         Faults = json_Dict['Faults']
         singleData = {
-            'FactoryID': FactoryID,
+            'FactoryID': Factory_ID,
             'MachineID': MachineID,
             'Power': Power,
             'Date_and_Time': Date_and_Time,
