@@ -43,7 +43,7 @@ def Data_Handler(topic, jsonData):
         }
         DataPackageA += [pymongo.InsertOne(singleData)]
         if i >= 9:
-            db.bottles.bulk_write(DataPackageA)
+            db.factory1.bottles.bulk_write(DataPackageA)
             i = 0
             DataPackageA = []
             print("Inserted bottle data into database.")
@@ -62,7 +62,7 @@ def Data_Handler(topic, jsonData):
         }
         DataPackageB += [pymongo.InsertOne(singleData)]
         if j >= 9:
-            db.faults.bulk_write(DataPackageB)
+            db.factory1.faults.bulk_write(DataPackageB)
             j = 0
             DataPackageB = []
             print("Inserted faults data into database.")
