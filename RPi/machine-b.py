@@ -8,8 +8,12 @@ import sys
 MQTT_Broker = "192.168.23.51"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
-MQTT_Topic_send = sys.argv[1]
-MQTT_Topic_listen = sys.argv[2]
+
+Machine_ID = sys.argv[1]
+Factory_ID = sys.argv[2]
+MQTT_Topic_send = '/trasownicy/kokokola/faults'  # sys.argv[3]
+MQTT_Topic_listen = '/trasownicy/kokokola/cp'  # sys.argv[4]
+
 power = 0
 faults = 0
 # ====================================================
@@ -90,7 +94,8 @@ def simulate_machine_b():
 def publish_Fake_Sensor_Values_to_MQTT():
     threading.Timer(10.0, publish_Fake_Sensor_Values_to_MQTT).start()
     simulate_machine_b()
-    bottles_data = {'Machine_ID': sys.argv[3],
+    bottles_data = {'Factory_ID': Factory_ID,
+                    'Machine_ID': Machine_ID,
                     'Power': power,
                     'Date': (datetime.today()).strftime("%d-%b-%Y %H:%M:%S:%f"),
                     'Faults': faults}

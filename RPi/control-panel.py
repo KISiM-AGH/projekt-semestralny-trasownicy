@@ -9,9 +9,9 @@ import os
 MQTT_Broker = "192.168.23.51"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
-MQTT_Topic_send = sys.argv[1]
-MQTT_Topic_A = sys.argv[2]
-MQTT_Topic_B = sys.argv[3]
+MQTT_Topic_send = '/trasownicy/kokokola/cp'  # sys.argv[1]
+MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[2]
+MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[3]
 power = 0
 bottles = 0
 faults = 0
