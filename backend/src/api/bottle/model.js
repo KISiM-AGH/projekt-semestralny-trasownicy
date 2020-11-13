@@ -1,13 +1,14 @@
 const mongoose = require('mongoose')
-const {Schema} = require('mongoose')
 
+const Schema = mongoose.Schema
 const bottleSchema = new Schema({
-    id:{
+    id: {
         type: String,
         index: {unique: true}
     },
     FactoryID: {
-        type: String
+        type: String,
+        index: {unique: true}
     },
     MachineID: {
         type: String
@@ -21,7 +22,6 @@ const bottleSchema = new Schema({
     Value: {
         type: Number
     },
-}, {
 })
 
 bottleSchema.methods = {
