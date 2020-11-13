@@ -1,7 +1,8 @@
-const { success, notFound } = require('../../services/response')
+const { success, notFound } = require('../../services/response/')
 const User = require('./model').model
 const { sign } = require('../../services/jwt')
 const _ = require('lodash')
+const catchDuplicateEmail = require("./helpers").catchDuplicateEmail;
 
 const index = (req, res, next) =>
   User.find()
@@ -26,7 +27,8 @@ const create = ({ body }, res, next) => {
       sign(user)
         .then((token) => ({ token, user: user.view(true) }))
         .then(success(res, 201))
-    }).catch(next)
+    })
+    .catch((err) => catchDuplicateEmail(res, err, next))
 }
 
 const auth = (req, res, next) => {

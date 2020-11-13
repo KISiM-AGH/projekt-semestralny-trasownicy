@@ -1,13 +1,13 @@
 {
-  "name": "backend",
+  "name": "zti2020project",
   "version": "1.0.0",
-  "description": "very nice backend",
+  "description": "Project for ZTI 2020.",
   "main": "src",
   "scripts": {
-    "start": "node ",
-    "dev": "node_modules/.bin/nodemon --inspect=9229 -i \\\"*.test.js\\\" ."
+    "start": "node .",
+    "dev": "nodemon --inspect=9229 -i \"*.test.js\" ."
   },
-  "author": "nieznany",
+  "author": "Adrian Mazurek",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.2",

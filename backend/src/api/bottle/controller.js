@@ -1,5 +1,6 @@
 const { success } = require('../../services/response')
 const Bottle = require('./model').model
+const today = require('./helpers').today
 
 const showAll = ({params}, res, next) =>
     Bottle.find({}, {})
@@ -13,12 +14,57 @@ const showByFactory = ({params}, res, next) =>
         .then(success(res))
         .catch(next)
 
-const showByMachine = ({params}, res, next) =>
-    Bottle.find({FactoryID: params.factoryID, MachineID: params.machineID}, {})
-        .then((bottles) => bottles.map((bottles) => bottles.view()))
+
+const histogramToday = ({params}, res, next) => {
+    const pipeline = [
+        {
+            '$match': {
+                'FactoryID': params.factoryID
+            }
+        }, {
+            '$project': {
+                'daySubstring': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 0, 11
+                    ]
+                },
+                'hourSubstring': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 12, 2
+                    ]
+                },
+                'MachineID': 1,
+                'Power': 1,
+                'Value': 1
+            }
+        }, {
+            '$match': {
+                'daySubstring': today
+            }
+        }, {
+            '$group': {
+                '_id': '$hourSubstring',
+                'y': {
+                    '$sum': '$Value'
+                }
+            }
+        }, {
+            '$project': {
+                'label': '$_id',
+                '_id': 0,
+                'y': 1
+            }
+        }, {
+            '$sort': {
+                'label': 1
+            }
+        }
+    ];
+    return Bottle.aggregate(pipeline)
         .then(success(res))
-        .catch(next)
+        .catch(next);
+}
 
 module.exports = {
-    showAll, showByFactory, showByMachine
+    showAll, showByFactory, histogramToday
 }

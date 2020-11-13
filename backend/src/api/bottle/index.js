@@ -1,4 +1,5 @@
-const {showAll, showByFactory, showByMachine} = require("./controller");
+const req = require("express");
+const {showAll, showByFactory, showByMachine, histogramToday} = require("./controller");
 const { Router } = require('express')
 const { token } = require('../../services/passport')
 const router = new Router()
@@ -11,11 +12,9 @@ router.get('/:factoryID',
     token({ required: true }),
     showByFactory)
 
-router.get('/:factoryID/:machineID',
+router.get('/histogram/:factoryID',
     token({ required: true }),
-    showByMachine)
+    histogramToday)
 
-//router.get('/:id',
-//  show)
 
 module.exports = router
