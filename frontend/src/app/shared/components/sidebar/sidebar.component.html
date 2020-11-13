@@ -1,1 +1,33 @@
-<p>sidebar works!</p>
+<mat-nav-list>
+  <div class="profile-card">
+    <div class="header">
+      <h2>Jan Hajdo</h2>
+      <h4>jh100@gmail.com</h4>
+    </div>
+    <img src="https://stanforduni.us/wp-content/uploads/2020/05/default-avatar.png" alt="Soufiane FADIL">
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Pages</h2>
+
+<!--  <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Factory 1</a>-->
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/factory1">Factory 1</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/factory2">Factory 2</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/compare">Compare</a>
+
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Tools</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+    <mat-icon>contact_phone</mat-icon>
+    Contacts
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/photos">
+    <mat-icon>photo_library</mat-icon>
+    Photos
+  </a>
+
+</mat-nav-list>
