@@ -1,10 +1,8 @@
 import json
 import pymongo
 import urllib.parse
-import sys
-
-MQTT_Topic_A = sys.argv[1]
-MQTT_Topic_B = sys.argv[2]
+MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[2]
+MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[3]
 
 # ===============================================================
 # Database Manager Class
@@ -26,9 +24,10 @@ DataPackageB = []
 # Functions to push Sensor Data into Database
 
 # Function to save Temperature to DB Table
-def Data_Handler(topic, jsonData):
+def Data_Handler(topic, jsonData, Factory_ID):
     # Parse Data
     json_Dict = json.loads(jsonData)
+#    FactoryID = json_Dict['Factory_ID']
     MachineID = json_Dict['Machine_ID']
     Power = json_Dict['Power']
     Date_and_Time = json_Dict['Date']
@@ -36,14 +35,15 @@ def Data_Handler(topic, jsonData):
     if topic == MQTT_Topic_A:
         Bottles = json_Dict['Bottles']
         singleData = {
+            'FactoryID': Factory_ID,
             'MachineID': MachineID,
             'Power': Power,
             'Date_and_Time': Date_and_Time,
-            'Bottles': Bottles,
+            'Value': Bottles,
         }
         DataPackageA += [pymongo.InsertOne(singleData)]
-        if i >= 9:
-            db.fabryka1.bottles.bulk_write(DataPackageA)
+        if i >= 35:
+            db.bottles.bulk_write(DataPackageA)
             i = 0
             DataPackageA = []
             print("Inserted bottle data into database.")
@@ -55,14 +55,15 @@ def Data_Handler(topic, jsonData):
     else:
         Faults = json_Dict['Faults']
         singleData = {
+            'FactoryID': Factory_ID,
             'MachineID': MachineID,
             'Power': Power,
             'Date_and_Time': Date_and_Time,
-            'Faults': Faults,
+            'Value': Faults,
         }
         DataPackageB += [pymongo.InsertOne(singleData)]
-        if j >= 9:
-            db.fabryka1.faults.bulk_write(DataPackageB)
+        if j >= 35:
+            db.faults.bulk_write(DataPackageB)
             j = 0
             DataPackageB = []
             print("Inserted faults data into database.")

@@ -1,13 +1,15 @@
 import paho.mqtt.client as mqtt
+from .sender import Data_Handler
 import sys
-from VM.sender import Data_Handler
+
+Factory_ID = sys.argv[1]
 
 # MQTT Settings
 MQTT_Broker = "192.168.23.51"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
-MQTT_Topic_A = sys.argv[1]
-MQTT_Topic_B = sys.argv[2]
+MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[1]
+MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[2]
 
 
 # Subscribe to all Sensors at Base Topic
@@ -23,7 +25,7 @@ def on_message(mosq, obj, msg):
     print("MQTT Data Received...")
     print("MQTT Topic: " + msg.topic)
     print("Data: ", msg.payload)
-    Data_Handler(msg.topic, msg.payload)
+    Data_Handler(msg.topic, msg.payload, Factory_ID)
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
