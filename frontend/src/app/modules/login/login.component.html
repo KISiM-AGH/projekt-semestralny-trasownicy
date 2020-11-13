@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="row" style="padding-top: 40px">
+
+  <div class="col-md-4 login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <!--        <label for="username">Email:</label>-->
+        <div class="error"  style="text-align: left" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Email is required</div>
+        <div class="error" style="text-align: left" *ngIf="loginForm.controls['username'].hasError('email') && loginForm.controls['username'].touched">Email must be valid email address</div>
+        <input type="email" class="form-control" formControlName="username" id="username" autocomplete="off" placeholder="email address">
+      </div>
+      <div class="form-group">
+        <!--        <label for="pwd">Password:</label>-->
+        <div class="error" style="text-align: left" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
+        <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off" placeholder="password">
+      </div>
+      <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+      <div *ngIf="invalidLogin" class="error">
+        <div>Invalid credentials.</div>
+      </div>
+    </form>
+  </div>
+</div>

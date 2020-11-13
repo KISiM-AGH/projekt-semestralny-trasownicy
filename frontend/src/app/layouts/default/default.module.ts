@@ -16,16 +16,17 @@ import { Factory2Component } from 'src/app/modules/factory2/factory2.component';
 import { PhotosComponent } from "../../modules/photos/photos.component";
 import { CompareComponent } from "../../modules/compare/compare.component";
 import {LoginComponent} from "../../modules/login/login.component";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     DefaultComponent,
-    LoginComponent,
     Factory1Component,
     Factory2Component,
     CompareComponent,
     PhotosComponent,
-    ContactsComponent
+    ContactsComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +37,9 @@ import {LoginComponent} from "../../modules/login/login.component";
     FlexLayoutModule,
     MatCardModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     DashboardService
