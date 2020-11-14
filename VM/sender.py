@@ -4,13 +4,14 @@ import urllib.parse
 MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[2]
 MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[3]
 
-# ===============================================================
-# Database Manager Class
+# ====================================================
+# MongoDB Setup
 username = urllib.parse.quote_plus('admin')
 password = urllib.parse.quote_plus('trasownicy69')
 client = pymongo.MongoClient(
     "mongodb+srv://%s:%s@cluster1.vmliw.mongodb.net/Cloud-beta-01?retryWrites=true&w=majority" % (username, password))
 db = client.kokokola
+# ====================================================
 
 serverStatusResult = db.command("serverStatus")
 print(serverStatusResult)
@@ -20,14 +21,10 @@ j = 0
 DataPackageA = []
 DataPackageB = []
 
-# ===============================================================
-# Functions to push Sensor Data into Database
 
-# Function to save Temperature to DB Table
 def Data_Handler(topic, jsonData, Factory_ID):
-    # Parse Data
     json_Dict = json.loads(jsonData)
-#    FactoryID = json_Dict['Factory_ID']
+    # FactoryID = json_Dict['Factory_ID']
     MachineID = json_Dict['Machine_ID']
     Power = json_Dict['Power']
     Date_and_Time = json_Dict['Date']
