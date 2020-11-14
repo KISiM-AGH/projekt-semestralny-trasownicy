@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {Router} from "@angular/router";
 import { DashboardService } from '../dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import {ApiService} from "../../core/api.service";
 
 export interface PeriodicElement {
   name: string;
@@ -49,10 +51,15 @@ export class Factory1Component implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-
-  constructor(private dashboardService: DashboardService) { }
+//do usuniecia dashboard ponizej
+  constructor(private dashboardService: DashboardService, private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
+    if (!window.localStorage.getItem('token')) {
+      this.router.navigate(['login']);
+      return;
+    }
+
     this.bigChart = this.dashboardService.bigChart();
     this.cards = this.dashboardService.cards();
     this.pieChart = this.dashboardService.pieChart();

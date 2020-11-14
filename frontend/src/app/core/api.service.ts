@@ -10,10 +10,11 @@ import {Bottle} from '../model/bottle.model';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://167.172.36.88:9000/api/users/';
-  baseUrlVehicle = 'http://167.172.36.88:9000/api/vehiclemodels/';
-  baseUrlManufacturer = 'http://167.172.36.88:9000/api/manufacturers/';
-  baseUrlTransaction = 'http://167.172.36.88:9000/api/transaction/';
+  // baseUrl = 'http://167.172.36.88:9000/api/users/';
+  baseUrl = 'http://localhost:9000/api/bottles/';
+  baseUrlVehicle = 'http://localhost:9000/api/vehiclemodels/';
+  baseUrlManufacturer = 'http://localhost:9000/api/manufacturers/';
+  baseUrlTransaction = 'http://localhost:9000/api/transaction/';
 
   login(loginPayload): Observable<ApiResponseLogin> {
     const loginToken = window.btoa(loginPayload.username + ':' + loginPayload.password);
@@ -21,8 +22,14 @@ export class ApiService {
     const requestParams = {
       headers: hh
     };
-    return this.http.post<ApiResponseLogin>('http://167.172.36.88:9000/api/users/auth', {}, requestParams);
+    return this.http.post<ApiResponseLogin>('http://localhost:9000/api/users/auth', {}, requestParams);
   }
+
+  // getBottles() Observable<any> {
+  //   return this.http.get<any>(this.baseUrl);
+  // }
+
+  //------------------------------------
 
   getUsers(): Observable<any> {
     return this.http.get<any>(this.baseUrl);

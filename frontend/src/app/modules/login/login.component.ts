@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ApiService} from '../../core/api.service';
@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   invalidLogin = false;
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
+
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {}
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -31,8 +32,9 @@ export class LoginComponent implements OnInit {
           window.localStorage.setItem('currentUser', data.user.id);
           window.localStorage.setItem('currentUserName', data.user.name);
           window.localStorage.setItem('currentUserRole', data.user.role);
-          if (data.user.role === 'admin') { this.router.navigate(['admin-menu']); }
-          else { this.router.navigate(['user-menu']); }
+          if (data.user.role === 'admin') {
+            this.router.navigate(['factory1']);
+          }
         }},
       error => {
         this.invalidLogin = true;

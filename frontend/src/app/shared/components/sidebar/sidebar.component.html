@@ -1,17 +1,16 @@
 <mat-nav-list>
   <div class="profile-card">
+    <img src="https://stanforduni.us/wp-content/uploads/2020/05/default-avatar.png" alt="Admin">
     <div class="header">
-      <h2>Jan Hajdo</h2>
-      <h4>jh100@gmail.com</h4>
+      <h2 class="uname">{{userName}}</h2>
+      <h4 class="urole">{{userRole}}</h4>
     </div>
-    <img src="https://stanforduni.us/wp-content/uploads/2020/05/default-avatar.png" alt="Soufiane FADIL">
   </div>
 
   <mat-divider></mat-divider>
 
   <h2 matSubheader>Pages</h2>
 
-<!--  <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Factory 1</a>-->
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/factory1">Factory 1</a>
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/factory2">Factory 2</a>
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/compare">Compare</a>

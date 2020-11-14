@@ -10,13 +10,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DashboardService } from 'src/app/modules/dashboard.service';
 import { Factory1Component } from "../../modules/factory1/factory1.component";
 import { Factory2Component } from 'src/app/modules/factory2/factory2.component';
 import { PhotosComponent } from "../../modules/photos/photos.component";
 import { CompareComponent } from "../../modules/compare/compare.component";
 import {LoginComponent} from "../../modules/login/login.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ApiService} from "../../core/api.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptor} from "../../core/interceptor";
 
 @NgModule({
   declarations: [
@@ -41,8 +43,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [
-    DashboardService
-  ]
+  // providers: [
+  //   DashboardService
+  // ]
+  providers: [ApiService, {provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi : true}]
 })
 export class DefaultModule { }
