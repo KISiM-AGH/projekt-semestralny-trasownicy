@@ -10,6 +10,7 @@ Keep_Alive_Interval = 45
 MQTT_Topic_send = '/trasownicy/kokokola/cp'  # sys.argv[1]
 MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[2]
 MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[3]
+WARNING_PERCENTAGE = 20
 power = 0
 bottles = 0
 faults = 0
@@ -78,14 +79,12 @@ mqttc.connect(MQTT_Broker, int(MQTT_Port), int(Keep_Alive_Interval))
 
 def publish_To_Topic(topic, message):
     mqttc.publish(topic, message)
-    print("Published: " + str(message) + " " + "on MQTT Topic: " + str(topic))
-    print("")
 
 
 def print_interface():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
-    if percentage > 20:
+    if percentage > WARNING_PERCENTAGE:
         print('\033[93m' + "DANGER!" + '\033[0m')
     print("Set power:")
 
@@ -102,7 +101,7 @@ def publish_New_Power_to_MQTT():
             print_interface()
         else:
             print_interface()
-            print('\033[33m' + "Wrong value. Must be integer between 1 and 100" + '\033[0m')
+            print('\033[33m' + "Wrong value. Must be integer between 0 and 100" + '\033[0m')
 
 
 mqttc.loop_start()
