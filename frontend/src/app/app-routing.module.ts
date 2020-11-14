@@ -14,7 +14,7 @@ const routes: Routes = [{
   component: DefaultComponent,
   children: [{
     path: '',
-    component: Factory1Component
+    component: LoginComponent
   }, {
     path: "login",
     component: LoginComponent

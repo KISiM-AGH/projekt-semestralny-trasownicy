@@ -15,15 +15,18 @@ export class HeaderComponent implements OnInit {
   ngOnInit() { }
 
   toggleSideBar() {
-    this.toggleSideBarForMe.emit();
-    setTimeout(() => {
-      window.dispatchEvent(
-        new Event('resize')
-      );
-    }, 300);
+    if(window.localStorage.getItem('currentUserRole') === 'admin') {
+      this.toggleSideBarForMe.emit();
+      setTimeout(() => {
+        window.dispatchEvent(
+          new Event('resize')
+        );
+      }, 300);
+    }
   }
 
   logout() {
+    this.toggleSideBar()
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('currentUserRole');
     this.router.navigate(['login']);
