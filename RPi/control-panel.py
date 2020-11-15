@@ -1,7 +1,5 @@
 import paho.mqtt.client as mqtt
-import threading
 import json
-import sys
 import os
 
 # ====================================================
@@ -12,11 +10,11 @@ Keep_Alive_Interval = 45
 MQTT_Topic_send = '/trasownicy/kokokola/cp'  # sys.argv[1]
 MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[2]
 MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[3]
+WARNING_PERCENTAGE = 20
 power = 0
 bottles = 0
 faults = 0
 percentage = 0
-
 # ====================================================
 
 
@@ -35,14 +33,9 @@ def on_publish(client, userdata, mid):
 
 
 def on_message(mosq, obj, msg):
-    global power
     global bottles
     global faults
     global percentage
-
-    print("MQTT Data Received...")
-    print("MQTT Topic: " + msg.topic)
-    print("Data: ", msg.payload)
 
     m_decode = str(msg.payload.decode("utf-8", "ignore"))
     m_in = json.loads(m_decode)
@@ -57,11 +50,7 @@ def on_message(mosq, obj, msg):
     else:
         percentage = 0
 
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
-    if percentage > 20:
-        print('\033[93m' + "DANGER!" + '\033[0m')
-    print("Set power:")
+    print_interface()
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
@@ -89,28 +78,31 @@ mqttc.connect(MQTT_Broker, int(MQTT_Port), int(Keep_Alive_Interval))
 
 def publish_To_Topic(topic, message):
     mqttc.publish(topic, message)
-    print("Published: " + str(message) + " " + "on MQTT Topic: " + str(topic))
-    print("")
+
+
+def print_interface():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
+    if percentage > WARNING_PERCENTAGE:
+        print('\033[93m' + "DANGER!" + '\033[0m')
+    print("Set power:")
 
 
 def publish_New_Power_to_MQTT():
     global power
-    global percentage
     while True:
-        input_val = input("Set power:")
+        input_val = input()
         if (input_val.isdigit()) and (0 <= int(input_val) <= 100):
             newPower = int(input_val)
             json_data = json.dumps({'Power': newPower})
             publish_To_Topic(MQTT_Topic_send, json_data)
             power = newPower
-            os.system('cls' if os.name == 'nt' else 'clear')
+            print_interface()
         else:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print("Wrong value. Must be integer between 1 and 100")
-        print("Bottles: ", bottles, ", Faults: ", faults, ", Percentage: ", percentage, "%", ", Power: ", power)
+            print_interface()
+            print('\033[33m' + "Wrong value. Must be integer between 0 and 100" + '\033[0m')
 
 
-# Continue the network loop
 mqttc.loop_start()
 publish_New_Power_to_MQTT()
 

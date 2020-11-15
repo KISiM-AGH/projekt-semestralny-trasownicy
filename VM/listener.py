@@ -4,15 +4,16 @@ import sys
 
 Factory_ID = sys.argv[1]
 
+# ====================================================
 # MQTT Settings
 MQTT_Broker = "192.168.23.51"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
 MQTT_Topic_A = '/trasownicy/kokokola/bottles'  # sys.argv[1]
 MQTT_Topic_B = '/trasownicy/kokokola/faults'  # sys.argv[2]
+# ====================================================
 
-
-# Subscribe to all Sensors at Base Topic
+# Subscribe to Sensors
 def on_connect(mosq, obj, rc, properties=None):
     mqttc.subscribe(MQTT_Topic_A, 0)
     mqttc.subscribe(MQTT_Topic_B, 0)

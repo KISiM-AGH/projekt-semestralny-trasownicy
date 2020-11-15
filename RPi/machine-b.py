@@ -71,11 +71,6 @@ def publish_To_Topic(topic, message):
     print("")
 
 
-# ====================================================
-# FAKE SENSOR
-# Dummy code used as Fake Sensor to publish some random values
-# to MQTT Broker
-
 def simulate_machine_b():
     global power
     global faults
