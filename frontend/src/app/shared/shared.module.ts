@@ -17,6 +17,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
 import { LinelabelComponent } from './widgets/linelabel/linelabel.component';
+import { CompareComponent } from './widgets/compare/compare.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LinelabelComponent } from './widgets/linelabel/linelabel.component';
     AreaComponent,
     CardComponent,
     PieComponent,
-    LinelabelComponent
+    LinelabelComponent,
+    CompareComponent
   ],
   imports: [
     CommonModule,

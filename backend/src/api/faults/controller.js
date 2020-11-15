@@ -65,6 +65,49 @@ const histogramToday = ({params}, res, next) => {
         .catch(next);
 }
 
+
+const byDay = ({params}, res, next) => {
+    const pipeline = [
+        {
+            '$match': {
+                'FactoryID': params.factoryID
+            }
+        }, {
+            '$project': {
+                'hourSubstring': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 12, 2
+                    ]
+                },
+                'Date_and_Time': 1,
+                'MachineID': 1,
+                'Power': 1,
+                'Value': 1
+            }
+        }, {
+            '$group': {
+                '_id': '$hourSubstring',
+                'y': {
+                    '$sum': '$Value'
+                }
+            }
+        }, {
+            '$project': {
+                'label': '$_id',
+                '_id': 0,
+                'y': 1
+            }
+        }, {
+            '$sort': {
+                'label': 1
+            }
+        }
+    ];
+    return Fault.aggregate(pipeline)
+        .then(success(res))
+        .catch(next);
+}
+
 module.exports = {
-    showAll, showByFactory, histogramToday
+    showAll, showByFactory, histogramToday, byDay
 }

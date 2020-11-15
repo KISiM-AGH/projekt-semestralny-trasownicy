@@ -11,6 +11,10 @@ router.get('/:factoryID',
     token({ required: true }),
     showByFactory)
 
+router.get('/daily/:factoryID',
+    token({ required: true }),
+    byDay)
+
 router.get('/histogram/:factoryID',
     token({ required: true }),
     histogramToday)
