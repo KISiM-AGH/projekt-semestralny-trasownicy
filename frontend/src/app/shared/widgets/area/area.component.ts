@@ -68,6 +68,10 @@ export class AreaComponent implements OnInit, OnChanges{
         type: 'datetime'
       },
 
+      credits: {
+        enabled: false
+      },
+
       series: [{name: 'Bottles', data: this.allBottlesData}, {name: 'Faults', data: this.allFaultsData},
         {name: 'Power', data: this.allPowerData}],
   };

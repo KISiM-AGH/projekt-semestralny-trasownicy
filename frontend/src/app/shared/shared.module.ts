@@ -18,6 +18,7 @@ import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
 import { LinelabelComponent } from './widgets/linelabel/linelabel.component';
 import { CompareComponent } from './widgets/compare/compare.component';
+import { ColumnComponent } from './widgets/column/column.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CompareComponent } from './widgets/compare/compare.component';
     CardComponent,
     PieComponent,
     LinelabelComponent,
-    CompareComponent
+    CompareComponent,
+    ColumnComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,9 @@ import { CompareComponent } from './widgets/compare/compare.component';
     AreaComponent,
     CardComponent,
     PieComponent,
-    LinelabelComponent
+    LinelabelComponent,
+    CompareComponent,
+    ColumnComponent
   ]
 })
 export class SharedModule { }
