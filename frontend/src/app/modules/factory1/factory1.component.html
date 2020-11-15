@@ -1,5 +1,4 @@
-<app-widget-linelabel title="Daily bottles" Ytitle="Bottles" [hourLabels]="this.hourLabels" [hourBottles]="this.hourBottles"  [hourFaults]="this.hourFaults"></app-widget-linelabel>
-
+<div align="center"><h1>Tu będzie duży wykres</h1></div>
 <br>
 
 <mat-divider></mat-divider>
@@ -7,11 +6,12 @@
 <br>
 
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-  <div fxFlex="40">
+  <div fxFlex="60">
+    <app-widget-linelabel title="Hourly bottles" Ytitle="Bottles" [hourLabels]="this.hourLabels" [hourBottles]="this.hourBottles"  [hourFaults]="this.hourFaults"></app-widget-linelabel>
 
   </div>
 
-  <div fxFlex="60">
-    <app-widget-pie title="Daily bottles" [data]="[possitiveBottles,negativeBottles]"></app-widget-pie>
+  <div fxFlex="40">
+    <app-widget-pie title="Daily bottles" [hourBottles]="this.hourBottles"  [hourFaults]="this.hourFaults"></app-widget-pie>
   </div>
 </div>

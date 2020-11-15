@@ -17,8 +17,8 @@ export class Factory1Component implements OnInit{
   hourBottles = [];
   hourFaults = [];
 
-  possitiveBottles = 60;
-  negativeBottles = 7;
+  // possitiveBottles = 34;
+  // negativeBottles = 14;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -34,8 +34,6 @@ export class Factory1Component implements OnInit{
       .subscribe( data => {
         this.hourLabels = data.map(item => Object.values(item)[1])
         this.hourBottles = data.map(item => Object.values(item)[0])
-        this.possitiveBottles = 60;
-        this.negativeBottles = 23;
       });
 
     this.apiService.getFaultsByHour('factory-1')
@@ -47,6 +45,7 @@ export class Factory1Component implements OnInit{
       .subscribe( data => {
         this.rawBottles = data;
       });
+
 
 
 

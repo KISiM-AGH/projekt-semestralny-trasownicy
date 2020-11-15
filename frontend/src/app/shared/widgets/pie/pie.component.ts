@@ -11,18 +11,22 @@ export class PieComponent implements OnInit, OnChanges {
 
   Highcharts = Highcharts;
   chartOptions = {};
-
+  bad = 0;
+  good = 0;
 
   @Input() title = "";
-  @Input() good = 1;
-  @Input() bad = 1;
-
   @Input() data = [];
+  @Input() hourBottles = [];
+  @Input() hourFaults = [];
 
   constructor() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+
+    this.bad = this.hourFaults.reduce(function(a, b) { return a + b; }, 0);
+    this.good = this.hourBottles.reduce(function(a, b) { return a + b; }, 0) - this.bad;
+
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -55,19 +59,17 @@ export class PieComponent implements OnInit, OnChanges {
       series: [{
         name: 'Bottles',
         colorByPoint: true,
-        data: [{name: "Good", y: this.data[0]}, {name: "Bad", y: this.data[1]}]
+        data: [{name: "Good", y: this.good}, {name: "Bad", y: this.bad}]
       }]
     };
     }
 
   ngOnInit() {
     HC_exporting(Highcharts);
-
     setTimeout(() => {
       window.dispatchEvent(
         new Event('resize')
       );
     }, 300);
   }
-
 }
