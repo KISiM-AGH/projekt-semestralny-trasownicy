@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import {ApiService} from "../../../core/api.service";
@@ -8,21 +8,32 @@ import {ApiService} from "../../../core/api.service";
   templateUrl: './linelabel.component.html',
   styleUrls: ['./linelabel.component.css']
 })
-export class LinelabelComponent implements OnInit {
+export class LinelabelComponent implements OnInit, OnChanges {
 
-  chartOptions: {};
-  @Input() title: string;
-  @Input() Ytitle: string;
-  @Input() FactoryID: string;
+  chartOptions;
+  @Input() title = "";
+  @Input() Ytitle = "";
+  @Input() FactoryID = "";
   @Input() hourLabels = [];
   @Input() data = [];
+  // getchartOptions;
 
   Highcharts = Highcharts;
 
   constructor(private apiService: ApiService) { }
 
-  getchartOptions() {
-    return {
+  ngOnInit(): void {
+    HC_exporting(Highcharts);
+
+    setTimeout(() => {
+      window.dispatchEvent(
+        new Event('resize')
+      );
+    }, 300);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.chartOptions = {
       chart: {
         type: 'line'
       },
@@ -56,21 +67,5 @@ export class LinelabelComponent implements OnInit {
       },
       series: [{name: this.title, data: this.data}]
     }
-
-
   }
-
-
-  ngOnInit(): void {
-    HC_exporting(Highcharts);
-
-    setTimeout(() => {
-      window.dispatchEvent(
-        new Event('resize')
-      );
-    }, 300);
-  }
-
-
-
 }
