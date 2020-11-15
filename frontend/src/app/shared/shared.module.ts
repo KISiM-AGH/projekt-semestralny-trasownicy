@@ -19,6 +19,7 @@ import { PieComponent } from './widgets/pie/pie.component';
 import { LinelabelComponent } from './widgets/linelabel/linelabel.component';
 import { CompareComponent } from './widgets/compare/compare.component';
 import { ColumnComponent } from './widgets/column/column.component';
+import { StackedColumnComponent } from './widgets/stacked-column/stacked-column.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ColumnComponent } from './widgets/column/column.component';
     PieComponent,
     LinelabelComponent,
     CompareComponent,
-    ColumnComponent
+    ColumnComponent,
+    StackedColumnComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import { ColumnComponent } from './widgets/column/column.component';
     PieComponent,
     LinelabelComponent,
     CompareComponent,
-    ColumnComponent
+    ColumnComponent,
+    StackedColumnComponent
   ]
 })
 export class SharedModule { }

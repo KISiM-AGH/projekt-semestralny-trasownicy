@@ -1,69 +1,78 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {Router} from "@angular/router";
-import { DashboardService } from '../dashboard.service';
-import { MatTableDataSource } from '@angular/material/table';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
-import {ApiService} from "../../core/api.service";
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
-];
+import {ApiService} from '../../core/api.service';
+import {Bottle} from '../../model/bottle.model';
 
 @Component({
   selector: 'app-factory2',
   templateUrl: './factory2.component.html',
   styleUrls: ['./factory2.component.scss']
 })
-export class Factory2Component implements OnInit {
+export class Factory2Component implements OnInit{
 
-  bigChart = [];
-  cards = [];
-  pieChart = [];
+  rawBottles: Bottle[];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  hourLabels = [];
+  hourBottles = [];
+  hourFaults = [];
+  allBottlesX = [];
+  allBottlesY = [];
+  allBottlesData = [];
+  allFaultsX = [];
+  allFaultsY = [];
+  allPowerX = [];
+  allPowerY = [];
+
+  // possitiveBottles = 34;
+  // negativeBottles = 14;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-//Do usuniecia dashboard ponizej
-  constructor(private dashboardService: DashboardService, private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
       return;
     }
 
-    this.bigChart = this.dashboardService.bigChart();
-    this.cards = this.dashboardService.cards();
-    this.pieChart = this.dashboardService.pieChart();
+    this.apiService.getBottlesByHour('factory-2')
+      .subscribe( data => {
+        this.hourLabels = data.map(item => Object.values(item)[1]);
+        this.hourBottles = data.map(item => Object.values(item)[0]);
+      });
 
-    this.dataSource.paginator = this.paginator;
+    this.apiService.getFaultsByHour('factory-2')
+      .subscribe( data => {
+        this.hourFaults = data.map(item => Object.values(item)[0]);
+      });
+
+    this.apiService.getBottles('factory-2')
+      .subscribe( data => {
+        this.allBottlesX = data.map(item => Object.values(item)[4]);
+        this.allBottlesY = data.map(item => Object.values(item)[5]);
+        // console.log(this.allBottlesX);
+        // console.log(this.allBottlesY);
+      });
+
+    this.apiService.getFaults('factory-2')
+      .subscribe( data => {
+        this.allPowerX = data.map(item => Object.values(item)[3]);
+        this.allPowerY = data.map(item => Object.values(item)[3]);
+        this.allFaultsX = data.map(item => Object.values(item)[4]);
+        this.allFaultsY = data.map(item => Object.values(item)[5]);
+        // console.log(this.allBottlesX);
+        // console.log(this.allBottlesY);
+      });
+
+
+
+    // this.hourLabels = this.rawHourBottles.map(item=>Object.values(item)[1])
+    // this.hourData = this.rawHourBottles.map(item=>Object.values(item)[0])
+
+
   }
+
 
 }
