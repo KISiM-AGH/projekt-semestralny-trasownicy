@@ -66,7 +66,7 @@ const histogramToday = ({params}, res, next) => {
 }
 
 
-const byDay = ({params}, res, next) => {
+const byHour = ({params}, res, next) => {
     const pipeline = [
         {
             '$match': {
@@ -79,27 +79,77 @@ const byDay = ({params}, res, next) => {
                         '$Date_and_Time', 12, 2
                     ]
                 },
-                'Date_and_Time': 1,
-                'MachineID': 1,
-                'Power': 1,
+                'dateSubstring': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 0, 11
+                    ]
+                },
+                'Value': 1
+            }
+        }, {
+            '$project': {
+                'date': {
+                    '$concat': [
+                        '$dateSubstring', ' ', '$hourSubstring', ':00'
+                    ]
+                },
                 'Value': 1
             }
         }, {
             '$group': {
-                '_id': '$hourSubstring',
+                '_id': '$date',
                 'y': {
                     '$sum': '$Value'
                 }
             }
         }, {
             '$project': {
-                'label': '$_id',
+                'date': '$_id',
                 '_id': 0,
                 'y': 1
             }
         }, {
             '$sort': {
-                'label': 1
+                'date': 1
+            }
+        }
+    ];
+    return Fault.aggregate(pipeline)
+        .then(success(res))
+        .catch(next);
+}
+
+const byDay = ({params}, res, next) => {
+    const pipeline = [
+        {
+            '$match': {
+                'FactoryID': params.factoryID
+            }
+        }, {
+            '$project': {
+                'date': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 0, 11
+                    ]
+                },
+                'Value': 1
+            }
+        }, {
+            '$group': {
+                '_id': '$date',
+                'y': {
+                    '$sum': '$Value'
+                }
+            }
+        }, {
+            '$project': {
+                'date': '$_id',
+                '_id': 0,
+                'y': 1
+            }
+        }, {
+            '$sort': {
+                'date': 1
             }
         }
     ];
@@ -109,5 +159,5 @@ const byDay = ({params}, res, next) => {
 }
 
 module.exports = {
-    showAll, showByFactory, histogramToday, byDay
+    showAll, showByFactory, histogramToday, byDay, byHour
 }

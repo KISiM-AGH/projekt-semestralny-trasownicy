@@ -65,6 +65,101 @@ const histogramToday = ({params}, res, next) => {
         .catch(next);
 }
 
+
+const byDay = ({params}, res, next) => {
+    const pipeline = [
+        {
+            '$match': {
+                'FactoryID': params.factoryID
+            }
+        }, {
+            '$project': {
+                'date': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 0, 11
+                    ]
+                },
+                'Value': 1
+            }
+        }, {
+            '$group': {
+                '_id': '$date',
+                'y': {
+                    '$sum': '$Value'
+                }
+            }
+        }, {
+            '$project': {
+                'date': '$_id',
+                '_id': 0,
+                'y': 1
+            }
+        }, {
+            '$sort': {
+                'date': 1
+            }
+        }
+    ];
+    return Bottle.aggregate(pipeline)
+        .then(success(res))
+        .catch(next);
+}
+
+
+const byHour = ({params}, res, next) => {
+    const pipeline = [
+        {
+            '$match': {
+                'FactoryID': params.factoryID
+            }
+        }, {
+            '$project': {
+                'hourSubstring': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 12, 2
+                    ]
+                },
+                'dateSubstring': {
+                    '$substrBytes': [
+                        '$Date_and_Time', 0, 11
+                    ]
+                },
+                'Value': 1
+            }
+        }, {
+            '$project': {
+                'date': {
+                    '$concat': [
+                        '$dateSubstring', ' ', '$hourSubstring', ':00'
+                    ]
+                },
+                'Value': 1
+            }
+        }, {
+            '$group': {
+                '_id': '$date',
+                'y': {
+                    '$sum': '$Value'
+                }
+            }
+        }, {
+            '$project': {
+                'date': '$_id',
+                '_id': 0,
+                'y': 1
+            }
+        }, {
+            '$sort': {
+                'date': 1
+            }
+        }
+    ];
+    return Bottle.aggregate(pipeline)
+        .then(success(res))
+        .catch(next);
+}
+
+
 module.exports = {
-    showAll, showByFactory, histogramToday
+    showAll, showByFactory, histogramToday, byDay, byHour
 }
