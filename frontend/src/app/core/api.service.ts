@@ -11,7 +11,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   // baseUrl = 'http://167.172.36.88:9000/api/users/';
-  baseUrl = 'http://localhost:9000/api/bottles/';
+  baseUrl = 'http://localhost:9000/api/';
   baseUrlVehicle = 'http://localhost:9000/api/vehiclemodels/';
   baseUrlManufacturer = 'http://localhost:9000/api/manufacturers/';
   baseUrlTransaction = 'http://localhost:9000/api/transaction/';
@@ -25,11 +25,31 @@ export class ApiService {
     return this.http.post<ApiResponseLogin>('http://localhost:9000/api/users/auth', {}, requestParams);
   }
 
-  // getBottles() Observable<any> {
-  //   return this.http.get<any>(this.baseUrl);
-  // }
+  getBottles(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'bottles/' + factoryID);
+  }
+
+  getFaults(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'faults/' + factoryID);
+  }
+
+  getBottlesByHour(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'bottles/histogram/' + factoryID);
+  }
+
+  getFaultsByHour(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'bottles/histogram/' + factoryID);
+  }
 
   //------------------------------------
+
+
+
+
+
+
+
+
 
   getUsers(): Observable<any> {
     return this.http.get<any>(this.baseUrl);

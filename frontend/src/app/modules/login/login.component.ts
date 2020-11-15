@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin = false;
 
+  @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
+
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {}
 
   onSubmit() {
