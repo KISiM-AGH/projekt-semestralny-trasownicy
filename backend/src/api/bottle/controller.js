@@ -160,6 +160,31 @@ const byHour = ({params}, res, next) => {
 }
 
 
+const sum = ({params}, res, next) => {
+    const pipeline = [
+        {
+            '$match': {
+                'FactoryID': params.factoryID
+            }
+        }, {
+            '$group': {
+                '_id': '$FactoryID',
+                'total': {
+                    '$sum': '$Value'
+                }
+            }
+        }, {
+            '$project': {
+                '_id': 0
+            }
+        }
+    ];
+    return Bottle.aggregate(pipeline)
+        .then(success(res))
+        .catch(next);
+}
+
+
 module.exports = {
-    showAll, showByFactory, histogramToday, byDay, byHour
+    showAll, showByFactory, histogramToday, byDay, byHour, sum
 }

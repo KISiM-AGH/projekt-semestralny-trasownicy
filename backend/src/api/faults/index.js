@@ -1,4 +1,4 @@
-const {showAll, showByFactory, histogramToday, byDay, byHour} = require("./controller");
+const {showAll, showByFactory, histogramToday, byDay, byHour, sum} = require("./controller");
 const { Router } = require('express')
 const { token } = require('../../services/passport')
 const router = new Router()
@@ -10,6 +10,10 @@ router.get('/',
 router.get('/:factoryID',
     token({ required: true }),
     showByFactory)
+
+router.get('/sum/:factoryID',
+    token({ required: true }),
+    sum)
 
 router.get('/daily/:factoryID',
     token({ required: true }),
