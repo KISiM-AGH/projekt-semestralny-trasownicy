@@ -69,6 +69,10 @@ export class StackedColumnComponent implements OnInit, OnChanges {
         }
       },
 
+      credits: {
+        enabled: false
+      },
+
       series: [{
         name: 'F1 Vergin Bottles',
         data: [53423, 44232, 47433, 62234, 45233],
