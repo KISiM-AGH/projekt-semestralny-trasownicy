@@ -5,3 +5,13 @@
 <mat-divider></mat-divider>
 
 <br>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+  <div fxFlex="40">
+
+  </div>
+
+  <div fxFlex="60">
+    <app-widget-pie title="Daily bottles" [data]="[possitiveBottles,negativeBottles]"></app-widget-pie>
+  </div>
+</div>

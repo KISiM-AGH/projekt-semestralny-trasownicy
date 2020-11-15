@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
@@ -7,16 +7,22 @@ import HC_exporting from 'highcharts/modules/exporting';
   templateUrl: './pie.component.html',
   styleUrls: ['./pie.component.css']
 })
-export class PieComponent implements OnInit {
+export class PieComponent implements OnInit, OnChanges {
 
   Highcharts = Highcharts;
   chartOptions = {};
 
+
+  @Input() title = "";
+  @Input() good = 1;
+  @Input() bad = 1;
+
   @Input() data = [];
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -25,10 +31,10 @@ export class PieComponent implements OnInit {
         type: 'pie'
       },
       title: {
-        text: 'RANDOM DATA'
+        text: this.title
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '{series.name}: <b>{point.y}</b>'
       },
       plotOptions: {
         pie: {
@@ -47,12 +53,14 @@ export class PieComponent implements OnInit {
         enabled: false
       },
       series: [{
-        name: 'Brands',
+        name: 'Bottles',
         colorByPoint: true,
-        data: this.data
+        data: [{name: "Good", y: this.data[0]}, {name: "Bad", y: this.data[1]}]
       }]
     };
+    }
 
+  ngOnInit() {
     HC_exporting(Highcharts);
 
     setTimeout(() => {
