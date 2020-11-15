@@ -1,7 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import {ApiService} from "../../../core/api.service";
+import more from 'highcharts/highcharts-more';
+import {ApiService} from '../../../core/api.service';
 
 @Component({
   selector: 'app-widget-linelabel',
@@ -11,9 +12,9 @@ import {ApiService} from "../../../core/api.service";
 export class LinelabelComponent implements OnInit, OnChanges {
 
   chartOptions;
-  @Input() title = "";
-  @Input() Ytitle = "";
-  @Input() FactoryID = "";
+  @Input() title = '';
+  @Input() Ytitle = '';
+  @Input() FactoryID = '';
   @Input() hourLabels = [];
   @Input() hourBottles = [];
   @Input() hourFaults = [];
@@ -34,6 +35,7 @@ export class LinelabelComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.chartOptions = {
+
       chart: {
         type: 'line'
       },
@@ -62,7 +64,7 @@ export class LinelabelComponent implements OnInit, OnChanges {
       exporting: {
         enabled: true
       },
-      series: [{name: "Bottles", data: this.hourBottles}, {name: "Faults", data: this.hourFaults}]
-    }
+      series: [{name: 'Bottles', data: this.hourBottles}, {name: 'Faults', data: this.hourFaults}]
+    };
   }
 }

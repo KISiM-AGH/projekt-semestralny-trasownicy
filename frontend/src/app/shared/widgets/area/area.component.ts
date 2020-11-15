@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
@@ -8,39 +8,20 @@ import HC_exporting from 'highcharts/modules/exporting';
   templateUrl: './area.component.html',
   styleUrls: ['./area.component.css']
 })
-export class AreaComponent implements OnInit {
+export class AreaComponent implements OnInit, OnChanges{
 
-  chartOptions: {};
-  @Input() data: any = [];
-
+  chartOptions;
+  @Input() title = '';
+  @Input() Ytitle = '';
+  @Input() FactoryID = '';
+  @Input() allBottles = [];
+//  @Input() yBottles = [];
+//  @Input() hourFaults = [];
   Highcharts = Highcharts;
 
   constructor() { }
 
-  ngOnInit() {
-    this.chartOptions = {
-      chart: {
-        type: 'area'
-      },
-      title: {
-        text: 'Random DATA'
-      },
-      subtitle: {
-        text: 'Demo'
-      },
-      tooltip: {
-        split: true,
-        valueSuffix: ' millions'
-      },
-      credits: {
-        enabled: false
-      },
-      exporting: {
-        enabled: true,
-      },
-      series: this.data
-    };
-
+  ngOnInit(): void {
     HC_exporting(Highcharts);
 
     setTimeout(() => {
@@ -49,5 +30,30 @@ export class AreaComponent implements OnInit {
       );
     }, 300);
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.allBottles);
+    this.chartOptions = {
+      chart: {
+        zoomType: 'x'
+      },
 
+      title: {
+        text: 'Highcharts drawing points'
+      },
+
+      subtitle: {
+        text: 'Using the Boost module'
+      },
+
+      tooltip: {
+        valueDecimals: 2
+      },
+
+      xAxis: {
+        type: 'datetime'
+      },
+
+      series: [{name: 'Bottles', data: this.allBottles}],
+  };
+}
 }

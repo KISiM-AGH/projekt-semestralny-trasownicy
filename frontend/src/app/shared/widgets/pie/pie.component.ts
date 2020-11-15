@@ -14,7 +14,7 @@ export class PieComponent implements OnInit, OnChanges {
   bad = 0;
   good = 0;
 
-  @Input() title = "";
+  @Input() title = '';
   @Input() data = [];
   @Input() hourBottles = [];
   @Input() hourFaults = [];
@@ -59,12 +59,12 @@ export class PieComponent implements OnInit, OnChanges {
       series: [{
         name: 'Bottles',
         colorByPoint: true,
-        data: [{name: "Good", y: this.good}, {name: "Bad", y: this.bad}]
+        data: [{name: 'Good', y: this.good}, {name: 'Bad', y: this.bad}]
       }]
     };
     }
 
-  ngOnInit() {
+  ngOnInit(): void {
     HC_exporting(Highcharts);
     setTimeout(() => {
       window.dispatchEvent(
