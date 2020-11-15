@@ -15,8 +15,8 @@ export class LinelabelComponent implements OnInit, OnChanges {
   @Input() Ytitle = "";
   @Input() FactoryID = "";
   @Input() hourLabels = [];
-  @Input() data = [];
-  // getchartOptions;
+  @Input() hourBottles = [];
+  @Input() hourFaults = [];
 
   Highcharts = Highcharts;
 
@@ -40,9 +40,6 @@ export class LinelabelComponent implements OnInit, OnChanges {
       title: {
         text: this.title
       },
-      subtitle: {
-        text: 'Source: koko-kola'
-      },
       xAxis: {
         categories: this.hourLabels
       },
@@ -65,7 +62,7 @@ export class LinelabelComponent implements OnInit, OnChanges {
       exporting: {
         enabled: true
       },
-      series: [{name: this.title, data: this.data}]
+      series: [{name: "Bottles", data: this.hourBottles}, {name: "Faults", data: this.hourFaults}]
     }
   }
 }

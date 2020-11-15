@@ -14,7 +14,8 @@ export class Factory1Component implements OnInit{
   rawBottles: Bottle[];
 
   hourLabels = [];
-  hourData = [];
+  hourBottles = [];
+  hourFaults = [];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -29,7 +30,12 @@ export class Factory1Component implements OnInit{
     this.apiService.getBottlesByHour('factory-1')
       .subscribe( data => {
         this.hourLabels = data.map(item => Object.values(item)[1])
-        this.hourData = data.map(item => Object.values(item)[0])
+        this.hourBottles = data.map(item => Object.values(item)[0])
+      });
+
+    this.apiService.getFaultsByHour('factory-1')
+      .subscribe( data => {
+        this.hourFaults = data.map(item => Object.values(item)[0])
       });
 
     this.apiService.getBottles('factory-1')

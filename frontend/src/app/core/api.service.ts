@@ -38,7 +38,7 @@ export class ApiService {
   }
 
   getFaultsByHour(factoryID: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + 'bottles/histogram/' + factoryID);
+    return this.http.get<any>(this.baseUrl + 'faults/histogram/' + factoryID);
   }
 
   //------------------------------------
