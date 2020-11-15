@@ -14,10 +14,17 @@ export class AreaComponent implements OnInit, OnChanges{
   @Input() title = '';
   @Input() Ytitle = '';
   @Input() FactoryID = '';
-  @Input() allBottles = [];
-//  @Input() yBottles = [];
+  @Input() allBottlesX = [];
+  @Input() allBottlesY = [];
+  @Input() allFaultsX = [];
+  @Input() allFaultsY = [];
+  @Input() allPowerX = [];
+  @Input() allPowerY = [];
 //  @Input() hourFaults = [];
   Highcharts = Highcharts;
+  allBottlesData = [];
+  allFaultsData = [];
+  allPowerData = [];
 
   constructor() { }
 
@@ -31,18 +38,26 @@ export class AreaComponent implements OnInit, OnChanges{
     }, 300);
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.allBottles);
+    let i;
+    for (i = 0; i < this.allBottlesX.length; i = i + 100) {
+      const arr = [new Date(this.allBottlesX[i]).getTime(), this.allBottlesY[i]];
+      this.allBottlesData.push(arr);
+    }
+    for (i = 0; i < this.allFaultsX.length; i = i + 100) {
+      const arr = [new Date(this.allFaultsX[i]).getTime(), this.allFaultsY[i]];
+      this.allFaultsData.push(arr);
+    }
+    for (i = 0; i < this.allFaultsX.length; i = i + 100) {
+      const arr = [new Date(this.allFaultsX[i]).getTime(), this.allPowerY[i]];
+      this.allPowerData.push(arr);
+    }
     this.chartOptions = {
       chart: {
         zoomType: 'x'
       },
 
       title: {
-        text: 'Highcharts drawing points'
-      },
-
-      subtitle: {
-        text: 'Using the Boost module'
+        text: this.title
       },
 
       tooltip: {
@@ -53,7 +68,8 @@ export class AreaComponent implements OnInit, OnChanges{
         type: 'datetime'
       },
 
-      series: [{name: 'Bottles', data: this.allBottles}],
+      series: [{name: 'Bottles', data: this.allBottlesData}, {name: 'Faults', data: this.allFaultsData},
+        {name: 'Power', data: this.allPowerData}],
   };
 }
 }

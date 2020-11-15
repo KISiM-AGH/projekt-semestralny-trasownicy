@@ -59,7 +59,7 @@ export class PieComponent implements OnInit, OnChanges {
       series: [{
         name: 'Bottles',
         colorByPoint: true,
-        data: [{name: 'Good', y: this.good}, {name: 'Bad', y: this.bad}]
+        data: [{name: 'Good', y: this.good}, {name: 'Faulty', y: this.bad}]
       }]
     };
     }

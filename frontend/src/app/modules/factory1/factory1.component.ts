@@ -21,6 +21,8 @@ export class Factory1Component implements OnInit{
   allBottlesData = [];
   allFaultsX = [];
   allFaultsY = [];
+  allPowerX = [];
+  allPowerY = [];
 
   // possitiveBottles = 34;
   // negativeBottles = 14;
@@ -52,12 +54,16 @@ export class Factory1Component implements OnInit{
         this.allBottlesY = data.map(item => Object.values(item)[5]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
-        let i;
-        for (i = 0; i < this.allBottlesX.length; i++) {
-          const arr = [new Date(this.allBottlesX[i]).getTime(), this.allBottlesY[i]];
-          this.allBottlesData.push(arr);
-        }
-        console.log(this.allBottlesData);
+      });
+
+    this.apiService.getFaults('factory-1')
+      .subscribe( data => {
+        this.allPowerX = data.map(item => Object.values(item)[3]);
+        this.allPowerY = data.map(item => Object.values(item)[3]);
+        this.allFaultsX = data.map(item => Object.values(item)[4]);
+        this.allFaultsY = data.map(item => Object.values(item)[5]);
+        // console.log(this.allBottlesX);
+        // console.log(this.allBottlesY);
       });
 
 
