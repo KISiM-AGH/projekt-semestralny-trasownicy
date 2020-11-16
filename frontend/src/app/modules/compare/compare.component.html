@@ -1,6 +1,6 @@
 
 <div>
-<app-widget-compare></app-widget-compare>
+<app-widget-compare title="Factory performance over time" [allBottlesXf1]="this.bottlesDailyXf1" [allBottlesXf2]="this.bottlesDailyXf2" [allBottlesYf1]="this.bottlesDailyYf1" [allBottlesYf2]="this.bottlesDailyYf2" [allFaultsXf1]="this.faultsDailyXf1" [allFaultsXf2]="this.faultsDailyXf2" [allFaultsYf1]="this.faultsDailyYf1" [allFaultsYf2]="this.faultsDailyYf2" ></app-widget-compare>
 </div>
 <br>
 
@@ -14,6 +14,6 @@
   </div>
 
   <div fxFlex="40">
-    <app-widget-column title="Daily bottles" [f1bottlesTotal]="f1bottlesTotal" [f2bottlesTotal]="f2bottlesTotal" [f1faultsTotal]="f1faultsTotal" [f2faultsTotal]="f2faultsTotal"></app-widget-column>
+    <app-widget-column title="Total output" [f1bottlesTotal]="f1bottlesTotal" [f2bottlesTotal]="f2bottlesTotal" [f1faultsTotal]="f1faultsTotal" [f2faultsTotal]="f2faultsTotal"></app-widget-column>
   </div>
 </div>

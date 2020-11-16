@@ -74,6 +74,6 @@ export class AreaComponent implements OnInit, OnChanges{
 
       series: [{name: 'Bottles', data: this.allBottlesData}, {name: 'Faults', data: this.allFaultsData},
         {name: 'Power', data: this.allPowerData}],
-  };
-}
+    };
+  }
 }

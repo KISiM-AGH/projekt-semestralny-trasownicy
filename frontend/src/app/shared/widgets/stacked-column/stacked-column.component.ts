@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import more from 'highcharts/highcharts-more';
 
 // https://www.highcharts.com/demo/column-stacked-and-grouped
 

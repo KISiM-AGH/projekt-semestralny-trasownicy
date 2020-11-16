@@ -42,7 +42,7 @@ export class ColumnComponent implements OnInit, OnChanges {
         type: 'column'
       },
       title: {
-        text: 'Whole data about bottles'
+        text: this.title
       },
       xAxis: {
         categories: ['Factory 1', 'Factory 2']
