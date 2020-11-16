@@ -13,6 +13,7 @@ import more from 'highcharts/highcharts-more';
 export class StackedColumnComponent implements OnInit, OnChanges {
 
   chartOptions = {};
+  @Input() title = '';
   @Input() dayLabels = [];
   @Input() factory1bottles = [];
   @Input() factory2bottles = [];
@@ -41,7 +42,7 @@ export class StackedColumnComponent implements OnInit, OnChanges {
       },
 
       title: {
-        text: 'Daily costam'
+        text: this.title
       },
 
       xAxis: {
@@ -75,19 +76,19 @@ export class StackedColumnComponent implements OnInit, OnChanges {
       },
 
       series: [{
-        name: 'Good bottles',
+        name: 'Good bottles F1',
         data: this.factory1bottles,
         stack: 'f1'
       }, {
-        name: 'Faulty bottles',
+        name: 'Faulty bottles F1',
         data: this.factory1faults,
         stack: 'f1'
       }, {
-        name: 'Good bottles',
+        name: 'Good bottles F2',
         data: this.factory2bottles,
         stack: 'f2'
       }, {
-        name: 'Faulty bottles',
+        name: 'Faulty bottles F2',
         data: this.factory2faults,
         stack: 'f2'
       }]

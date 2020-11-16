@@ -23,31 +23,31 @@ export class CompareComponent implements OnInit {
       return;
     }
 
-    this.apiService.getBottlesByHourTotal('factory-1')
+    this.apiService.getBottlesByDayTotal('factory-1')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[0]);
-        this.factory1bottles = data.map(item => Object.values(item)[1]);
+        this.dayLabels = data.map(item => Object.values(item)[1]);
+        this.factory1bottles = data.map(item => Object.values(item)[0]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
-    this.apiService.getBottlesByHourTotal('factory-2')
+    this.apiService.getBottlesByDayTotal('factory-2')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[0]);
-        this.factory2bottles = data.map(item => Object.values(item)[1]);
+        this.dayLabels = data.map(item => Object.values(item)[1]);
+        this.factory2bottles = data.map(item => Object.values(item)[0]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
-    this.apiService.getFaultsByHourTotal('factory-1')
+    this.apiService.getFaultsByDayTotal('factory-1')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[0]);
-        this.factory1faults = data.map(item => Object.values(item)[1]);
+        this.dayLabels = data.map(item => Object.values(item)[1]);
+        this.factory1faults = data.map(item => Object.values(item)[0]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
-    this.apiService.getFaultsByHourTotal('factory-2')
+    this.apiService.getFaultsByDayTotal('factory-2')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[0]);
-        this.factory2faults = data.map(item => Object.values(item)[1]);
+        this.dayLabels = data.map(item => Object.values(item)[1]);
+        this.factory2faults = data.map(item => Object.values(item)[0]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
