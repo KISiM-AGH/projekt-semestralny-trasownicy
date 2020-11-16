@@ -15,7 +15,7 @@ export class ApiService {
     const requestParams = {
       headers: hh
     };
-    return this.http.post<ApiResponseLogin>('http://54.152.103.77:9000/api/users/auth', {}, requestParams);
+    return this.http.post<ApiResponseLogin>(this.baseUrl + 'users/auth', {}, requestParams);
   }
 
   getBottles(factoryID: string): Observable<any> {
