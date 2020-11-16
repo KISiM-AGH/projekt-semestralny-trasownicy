@@ -35,7 +35,7 @@ export class ColumnComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.bottlesTotal = [this.f1bottlesTotal - this.f1faultsTotal, this.f2bottlesTotal-this.f2faultsTotal];
+    this.bottlesTotal = [this.f1bottlesTotal - this.f1faultsTotal, this.f2bottlesTotal - this.f2faultsTotal];
     this.faultsTotal = [this.f1faultsTotal, this.f2faultsTotal];
     this.chartOptions = {
       chart: {
@@ -97,7 +97,7 @@ export class ColumnComponent implements OnInit, OnChanges {
         name: 'Faulty bottles',
         data: this.faultsTotal
       }]
-    }
+    };
   }
 
 }

@@ -73,7 +73,9 @@ export class CompareComponent implements OnInit, OnChanges {
       },
 
       tooltip: {
-        valueDecimals: 2
+        valueDecimals: 2,
+        shared: true,
+        crosshairs: true
       },
 
       xAxis: {

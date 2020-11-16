@@ -1,8 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import more from 'highcharts/highcharts-more';
-import {ApiService} from '../../../core/api.service';
 
 @Component({
   selector: 'app-widget-linelabel',
@@ -21,7 +19,7 @@ export class LinelabelComponent implements OnInit, OnChanges {
 
   Highcharts = Highcharts;
 
-  constructor(private apiService: ApiService) { }
+  constructor() { }
 
   ngOnInit(): void {
     HC_exporting(Highcharts);
@@ -44,6 +42,11 @@ export class LinelabelComponent implements OnInit, OnChanges {
       },
       xAxis: {
         categories: this.hourLabels
+      },
+      tooltip: {
+        valueDecimals: 2,
+        shared: true,
+        crosshairs: true
       },
       yAxis: {
         title: {

@@ -20,7 +20,6 @@ export class AreaComponent implements OnInit, OnChanges{
   @Input() allFaultsY = [];
   @Input() allPowerX = [];
   @Input() allPowerY = [];
-//  @Input() hourFaults = [];
   Highcharts = Highcharts;
   allBottlesData = [];
   allFaultsData = [];

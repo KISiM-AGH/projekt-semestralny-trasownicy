@@ -24,8 +24,8 @@ export class PieComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    this.bad = this.hourFaults.reduce(function(a, b) { return a + b; }, 0);
-    this.good = this.hourBottles.reduce(function(a, b) { return a + b; }, 0) - this.bad;
+    this.bad = this.hourFaults.reduce((a, b) => a + b, 0);
+    this.good = this.hourBottles.reduce((a, b) => a + b, 0) - this.bad;
 
     this.chartOptions = {
       chart: {
