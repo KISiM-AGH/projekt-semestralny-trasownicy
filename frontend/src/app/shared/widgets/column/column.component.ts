@@ -13,8 +13,13 @@ export class ColumnComponent implements OnInit, OnChanges {
 
   chartOptions;
   @Input() title = '';
-  @Input() bottlesTotal = [];
-  @Input() faultsTotal = [];
+  @Input() f1bottlesTotal: number;
+  @Input() f2bottlesTotal: number;
+  @Input() f1faultsTotal: number;
+  @Input() f2faultsTotal: number;
+
+  bottlesTotal = [];
+  faultsTotal = [];
 
   Highcharts = Highcharts;
 
@@ -30,6 +35,8 @@ export class ColumnComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.bottlesTotal = [this.f1bottlesTotal - this.f1faultsTotal, this.f2bottlesTotal-this.f2faultsTotal];
+    this.faultsTotal = [this.f1faultsTotal, this.f2faultsTotal];
     this.chartOptions = {
       chart: {
         type: 'column'
@@ -84,11 +91,11 @@ export class ColumnComponent implements OnInit, OnChanges {
         enabled: false
       },
       series: [{
-        name: 'Vergin bottles',
+        name: 'Good bottles',
         data: this.bottlesTotal
         // data: [5, 3]
       }, {
-        name: 'Faults',
+        name: 'Faulty bottles',
         data: this.faultsTotal
       }]
     }
