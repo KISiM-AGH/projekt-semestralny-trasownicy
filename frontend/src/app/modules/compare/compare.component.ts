@@ -25,29 +25,29 @@ export class CompareComponent implements OnInit {
 
     this.apiService.getBottlesByHourTotal('factory-1')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[3]);
-        this.factory1bottles = data.map(item => Object.values(item)[3]);
+        this.dayLabels = data.map(item => Object.values(item)[0]);
+        this.factory1bottles = data.map(item => Object.values(item)[1]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
-    this.apiService.getBottlesByHourTotal('factory-1')
+    this.apiService.getBottlesByHourTotal('factory-2')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[3]);
-        this.factory1bottles = data.map(item => Object.values(item)[3]);
+        this.dayLabels = data.map(item => Object.values(item)[0]);
+        this.factory2bottles = data.map(item => Object.values(item)[1]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
-    this.apiService.getBottlesByHourTotal('factory-1')
+    this.apiService.getFaultsByHourTotal('factory-1')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[3]);
-        this.factory1bottles = data.map(item => Object.values(item)[3]);
+        this.dayLabels = data.map(item => Object.values(item)[0]);
+        this.factory1faults = data.map(item => Object.values(item)[1]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
-    this.apiService.getBottlesByHourTotal('factory-1')
+    this.apiService.getFaultsByHourTotal('factory-2')
       .subscribe( data => {
-        this.dayLabels = data.map(item => Object.values(item)[3]);
-        this.factory1bottles = data.map(item => Object.values(item)[3]);
+        this.dayLabels = data.map(item => Object.values(item)[0]);
+        this.factory2faults = data.map(item => Object.values(item)[1]);
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
