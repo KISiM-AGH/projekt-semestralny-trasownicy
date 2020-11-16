@@ -16,6 +16,8 @@ export class CompareComponent implements OnInit {
   factory1faults = [];
   factory2bottles = [];
   factory2faults = [];
+  bottlesTotal = [];
+  faultsTotal = [];
 
   ngOnInit(): void {
     if (!window.localStorage.getItem('token')) {
@@ -51,6 +53,24 @@ export class CompareComponent implements OnInit {
         // console.log(this.allBottlesX);
         // console.log(this.allBottlesY);
       });
+    this.apiService.getBottlesTotal('factory-1')
+      .subscribe( data => {
+        this.bottlesTotal.push(data.map(item => Object.values(item)[0]))
+      });
+    this.apiService.getFaultsTotal('factory-1')
+      .subscribe( data => {
+        this.faultsTotal.push(data.map(item => Object.values(item)[0]))
+      });
+    this.apiService.getBottlesTotal('factory-2')
+      .subscribe( data => {
+        this.bottlesTotal.push(data.map(item => Object.values(item)[0]))
+        console.log(this.bottlesTotal)
+      });
+    this.apiService.getFaultsTotal('factory-2')
+      .subscribe( data => {
+        this.faultsTotal.push(data.map(item => Object.values(item)[0]))
+        console.log(this.faultsTotal)
+      })
   }
 
 }

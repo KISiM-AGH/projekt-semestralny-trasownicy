@@ -49,4 +49,12 @@ export class ApiService {
   getFaultsByDayTotal(factoryID: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'faults/daily/' + factoryID);
   }
+
+  getBottlesTotal(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'bottles/sum/' + factoryID);
+  }
+
+  getFaultsTotal(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'faults/sum/' + factoryID);
+  }
 }

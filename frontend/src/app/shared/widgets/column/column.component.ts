@@ -13,7 +13,8 @@ export class ColumnComponent implements OnInit, OnChanges {
 
   chartOptions;
   @Input() title = '';
-  @Input() Ytitle = '';
+  @Input() bottlesTotal = [];
+  @Input() faultsTotal = [];
 
   Highcharts = Highcharts;
 
@@ -84,10 +85,11 @@ export class ColumnComponent implements OnInit, OnChanges {
       },
       series: [{
         name: 'Vergin bottles',
-        data: [5, 3]
+        data: this.bottlesTotal
+        // data: [5, 3]
       }, {
         name: 'Faults',
-        data: [2, 2]
+        data: this.faultsTotal
       }]
     }
   }
