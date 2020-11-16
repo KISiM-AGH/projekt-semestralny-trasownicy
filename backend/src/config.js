@@ -3,7 +3,7 @@ const merge = require('lodash/merge')
 
 const config = {
     all: {
-        env: process.env.NODE_ENV || 'development',
+        env: process.env.NODE_ENV || 'production',
         root: path.join(__dirname, '..'),
         port: 9000,
         ip: 'localhost',
@@ -35,10 +35,10 @@ const config = {
         jwtSecret: '48mXwHcnH8qEwWgzo24y5BEIxgAU0a'
     },
     production: {
-        ip: process.env.IP || undefined,
+        ip: process.env.IP || '54.152.103.77',
         port: process.env.PORT || 8080,
         mongo: {
-            uri: '### address of production server ###',
+            uri: 'mongodb+srv://trasownik:trasownicy69@cluster1.vmliw.mongodb.net/kokokola?retryWrites=true&w=majority',
         },
         jwtSecret: process.env.SECRET
     }
