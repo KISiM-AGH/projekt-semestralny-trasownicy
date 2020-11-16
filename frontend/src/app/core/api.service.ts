@@ -7,7 +7,7 @@ import {ApiResponseLogin} from '../model/api.response.login';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:9000/api/';
+  baseUrl = 'http://54.152.103.77:9000/api/';
 
   login(loginPayload): Observable<ApiResponseLogin> {
     const loginToken = window.btoa(loginPayload.username + ':' + loginPayload.password);
@@ -15,7 +15,7 @@ export class ApiService {
     const requestParams = {
       headers: hh
     };
-    return this.http.post<ApiResponseLogin>('http://localhost:9000/api/users/auth', {}, requestParams);
+    return this.http.post<ApiResponseLogin>('http://54.152.103.77:9000/api/users/auth', {}, requestParams);
   }
 
   getBottles(factoryID: string): Observable<any> {

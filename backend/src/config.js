@@ -40,7 +40,7 @@ const config = {
         mongo: {
             uri: 'mongodb+srv://trasownik:trasownicy69@cluster1.vmliw.mongodb.net/kokokola?retryWrites=true&w=majority',
         },
-        jwtSecret: process.env.SECRET
+        jwtSecret: '48mXwHcnH8qEwWgzo24y5BEIxgAU0a'
     }
 }
 
