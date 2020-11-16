@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import {ApiService} from '../../core/api.service';
-import {Bottle} from '../../model/bottle.model';
 
 @Component({
   selector: 'app-factory2',
@@ -10,8 +9,6 @@ import {Bottle} from '../../model/bottle.model';
   styleUrls: ['./factory2.component.scss']
 })
 export class Factory2Component implements OnInit{
-
-  rawBottles: Bottle[];
 
   hourLabels = [];
   hourBottles = [];
@@ -23,9 +20,6 @@ export class Factory2Component implements OnInit{
   allFaultsY = [];
   allPowerX = [];
   allPowerY = [];
-
-  // possitiveBottles = 34;
-  // negativeBottles = 14;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -52,8 +46,6 @@ export class Factory2Component implements OnInit{
       .subscribe( data => {
         this.allBottlesX = data.map(item => Object.values(item)[4]);
         this.allBottlesY = data.map(item => Object.values(item)[5]);
-        // console.log(this.allBottlesX);
-        // console.log(this.allBottlesY);
       });
 
     this.apiService.getFaults('factory-2')
@@ -62,17 +54,6 @@ export class Factory2Component implements OnInit{
         this.allPowerY = data.map(item => Object.values(item)[3]);
         this.allFaultsX = data.map(item => Object.values(item)[4]);
         this.allFaultsY = data.map(item => Object.values(item)[5]);
-        // console.log(this.allBottlesX);
-        // console.log(this.allBottlesY);
       });
-
-
-
-    // this.hourLabels = this.rawHourBottles.map(item=>Object.values(item)[1])
-    // this.hourData = this.rawHourBottles.map(item=>Object.values(item)[0])
-
-
   }
-
-
 }

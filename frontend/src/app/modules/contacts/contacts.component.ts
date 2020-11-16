@@ -5,7 +5,7 @@ import {ApiService} from "../../core/api.service";
 @Component({
   selector: 'app-posts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.css']
+  styleUrls: ['./contacts.component.scss']
 })
 export class ContactsComponent implements OnInit {
 

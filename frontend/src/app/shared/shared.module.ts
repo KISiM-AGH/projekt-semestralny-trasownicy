@@ -8,13 +8,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
-
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AreaComponent } from './widgets/area/area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
 import { LinelabelComponent } from './widgets/linelabel/linelabel.component';
 import { CompareComponent } from './widgets/compare/compare.component';
@@ -27,7 +25,6 @@ import { StackedColumnComponent } from './widgets/stacked-column/stacked-column.
     FooterComponent,
     SidebarComponent,
     AreaComponent,
-    CardComponent,
     PieComponent,
     LinelabelComponent,
     CompareComponent,
@@ -51,7 +48,6 @@ import { StackedColumnComponent } from './widgets/stacked-column/stacked-column.
     FooterComponent,
     SidebarComponent,
     AreaComponent,
-    CardComponent,
     PieComponent,
     LinelabelComponent,
     CompareComponent,

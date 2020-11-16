@@ -93,7 +93,6 @@ export class ColumnComponent implements OnInit, OnChanges {
       series: [{
         name: 'Good bottles',
         data: this.bottlesTotal
-        // data: [5, 3]
       }, {
         name: 'Faulty bottles',
         data: this.faultsTotal
