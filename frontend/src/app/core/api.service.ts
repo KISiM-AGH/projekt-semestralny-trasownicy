@@ -33,4 +33,20 @@ export class ApiService {
   getFaultsByHour(factoryID: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'faults/histogram/' + factoryID);
   }
+
+  getBottlesByHourTotal(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'bottles/hourly/' + factoryID);
+  }
+
+  getFaultsByHourTotal(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'faults/hourly/' + factoryID);
+  }
+
+  getBottlesByDayTotal(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'bottles/daily/' + factoryID);
+  }
+
+  getFaultsByDayTotal(factoryID: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'faults/daily/' + factoryID);
+  }
 }

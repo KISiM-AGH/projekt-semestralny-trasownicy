@@ -3,7 +3,7 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import more from 'highcharts/highcharts-more';
 
-//https://www.highcharts.com/demo/column-stacked-and-grouped
+// https://www.highcharts.com/demo/column-stacked-and-grouped
 
 @Component({
   selector: 'app-widget-stacked-column',
@@ -13,10 +13,11 @@ import more from 'highcharts/highcharts-more';
 export class StackedColumnComponent implements OnInit, OnChanges {
 
   chartOptions = {};
-
-  // @Input() hourLabels = [];
-  // @Input() hourBottles = [];
-  // @Input() hourFaults = [];
+  @Input() dayLabels = [];
+  @Input() factory1bottles = [];
+  @Input() factory2bottles = [];
+  @Input() factory1faults = [];
+  @Input() factory2faults = [];
 
   Highcharts = Highcharts;
 
@@ -44,7 +45,7 @@ export class StackedColumnComponent implements OnInit, OnChanges {
       },
 
       xAxis: {
-        categories: ['Day1', 'Day2', 'Day3', 'Day4', 'Day5']
+        categories: this.dayLabels
       },
 
       yAxis: {
@@ -56,7 +57,7 @@ export class StackedColumnComponent implements OnInit, OnChanges {
       },
 
       tooltip: {
-        formatter: function () {
+        formatter(): string {
           return '<b>' + this.x + '</b><br/>' +
             this.series.name + ': ' + this.y + '<br/>' +
             'Total: ' + this.point.stackTotal;
@@ -74,21 +75,21 @@ export class StackedColumnComponent implements OnInit, OnChanges {
       },
 
       series: [{
-        name: 'F1 Vergin Bottles',
-        data: [53423, 44232, 47433, 62234, 45233],
-        stack: 'male'
+        name: 'Good bottles',
+        data: this.factory1bottles,
+        stack: 'f1'
       }, {
-        name: 'F1 Faults',
-        data: [967, 575, 1023, 865, 434],
-        stack: 'male'
+        name: 'Faulty bottles',
+        data: this.factory1faults,
+        stack: 'f1'
       }, {
-        name: 'F2 Vergin Bottles',
-        data: [48423, 49232, 56433, 42234, 49233],
-        stack: 'female'
+        name: 'Good bottles',
+        data: this.factory2bottles,
+        stack: 'f2'
       }, {
-        name: 'F2 Faults',
-        data: [767, 775, 623, 965, 834],
-        stack: 'female'
+        name: 'Faulty bottles',
+        data: this.factory2faults,
+        stack: 'f2'
       }]
     };
   }
