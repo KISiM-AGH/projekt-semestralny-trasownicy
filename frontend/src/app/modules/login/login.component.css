@@ -31,7 +31,7 @@
   font-size: 14px;
 }
 
-.btn-success{
+.btn-success:not([disabled]){
   text-transform: uppercase;
   outline: 0;
   background: #4CAF50;
@@ -42,8 +42,19 @@
   font-size: 14px;
   cursor: pointer;
 }
+.btn-success2:disabled{
+  text-transform: uppercase;
+  outline: 0;
+  background: #7ecd7e;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: not-allowed;
+}
 
-.btn-success:hover,.btn-success:active,.btn-success:focus {
+.btn-success:hover:not([disabled]),.btn-success:active:not([disabled]),.btn-success:focus:not([disabled]) {
   background: #43a047;
 }
 
@@ -56,3 +67,4 @@
   color: #4CAF50;
   text-decoration: none;
 }
+

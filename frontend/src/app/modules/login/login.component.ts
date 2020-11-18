@@ -14,9 +14,13 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin = false;
 
+  siteKey: string;
+
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {
+    this.siteKey = "6Ld0jeQZAAAAAKGdGdMN2El3uR31YZ53fzCVxSsg";
+  }
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -48,7 +52,8 @@ export class LoginComponent implements OnInit {
     window.localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      recaptcha: ['', Validators.required]
     });
   }
 }

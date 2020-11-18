@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ApiService} from '../../core/api.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../../core/interceptor';
+import {NgxCaptchaModule} from "ngx-captcha";
 
 @NgModule({
   declarations: [
@@ -30,19 +31,20 @@ import {TokenInterceptor} from '../../core/interceptor';
     ContactsComponent,
     LoginComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    SharedModule,
-    MatSidenavModule,
-    MatDividerModule,
-    FlexLayoutModule,
-    MatCardModule,
-    MatPaginatorModule,
-    MatTableModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        SharedModule,
+        MatSidenavModule,
+        MatDividerModule,
+        FlexLayoutModule,
+        MatCardModule,
+        MatPaginatorModule,
+        MatTableModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxCaptchaModule
+    ],
   // providers: [
   //   DashboardService
   // ]

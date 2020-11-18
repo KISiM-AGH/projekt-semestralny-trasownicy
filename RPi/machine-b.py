@@ -74,7 +74,6 @@ def publish_To_Topic(topic, message):
 def simulate_machine_b():
     global power
     global faults
-
     a = 0.000443531
     b = 2.46193
 
