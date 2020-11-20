@@ -10,8 +10,8 @@ const config = {
         apiRoot: '/api',
         mongo: {
             options : {
-                useCreateIndex: true,        // DeprecationWarning: collection.ensureIndex is deprecated.
-                useNewUrlParser: true           // DeprecationWarning: current URL string parser is deprecated
+                useCreateIndex: true,
+                useNewUrlParser: true
             }
         },
 
