@@ -100,8 +100,8 @@ def publish_New_Power_to_MQTT():
             print_interface()
         else:
             print_interface()
-            print('\033[33m' + "Wrong value. Must be integer between 0 and 100" + '\033[0m')
-
+            print('\033[33m' + "Wrong value. Must be integer between "
+                               "0 and 100" + '\033[0m')
 
 mqttc.loop_start()
 publish_New_Power_to_MQTT()

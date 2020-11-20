@@ -13,7 +13,12 @@
         <div class="error" style="text-align: left" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
         <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off" placeholder="password">
       </div>
-      <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+      <ngx-recaptcha2 #captchaElem
+                      [siteKey]="siteKey"
+                      formControlName="recaptcha" >
+      </ngx-recaptcha2>
+      <br>
+      <button class="btn btn-success btn-success2" [disabled]="loginForm.invalid">Login</button>
       <div *ngIf="invalidLogin" class="error">
         <div>Invalid credentials.</div>
       </div>
