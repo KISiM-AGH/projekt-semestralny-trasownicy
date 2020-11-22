@@ -60,9 +60,6 @@ export class CompareComponent implements OnInit, OnChanges {
     }
     this.allFaultsData = [arr2, arr3];
 
-    console.log(this.allBottlesData);
-    console.log(this.allFaultsData);
-
     this.chartOptions = {
       chart: {
         zoomType: 'x'
