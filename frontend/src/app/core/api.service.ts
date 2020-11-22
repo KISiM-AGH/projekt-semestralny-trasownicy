@@ -7,7 +7,7 @@ import {ApiResponseLogin} from '../model/api.response.login';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://54.152.103.77:9000/api/';
+  baseUrl = 'https://34.203.217.5:9000/api/';
 
   login(loginPayload): Observable<ApiResponseLogin> {
     const loginToken = window.btoa(loginPayload.username + ':' + loginPayload.password);
