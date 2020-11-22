@@ -35,7 +35,7 @@ const config = {
         jwtSecret: '48mXwHcnH8qEwWgzo24y5BEIxgAU0a'
     },
     production: {
-        ip: process.env.IP || '54.152.103.77',
+        ip: process.env.IP || '172.31.86.209',
         port: process.env.PORT || 8080,
         mongo: {
             uri: 'mongodb+srv://trasownik:trasownicy69@cluster1.vmliw.mongodb.net/kokokola?retryWrites=true&w=majority',

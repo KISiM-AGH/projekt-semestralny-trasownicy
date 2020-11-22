@@ -5,12 +5,11 @@ const cors = require('cors')
 const expressConfig = (apiRoot, routes) => {
   const app = express()
 
-  app.use(cors());
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+  const corsOptions = {
+    origin: 'https://koko-kola.xyz/',
+    optionsSuccessStatus: 200
+  }
+  app.use(cors(corsOptions));
   app.use(bodyParser.json())
   app.use(apiRoot, routes)
 
